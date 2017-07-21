@@ -299,6 +299,6 @@ public class FragmentInterceptor extends com.mondyxue.xrouter.interceptor.Fragme
 ---
 小弟不才，第一次分享代码到Github，码代码这茬，一个人容易出事，而且项目来不及写注释，所以特此贴上Q群二维码，如果大家有什么建议和槽点，欢迎能够多多交流。
 
-[Demo下载](https://github.com/MondyXue/XRouter/static/demo.apk)
+[Demo下载](https://raw.githubusercontent.com/MondyXue/XRouter/master/static/demo.apk)
 
 ![](https://raw.githubusercontent.com/MondyXue/XRouter/master/static/qrcode_xrouter_group.png)
