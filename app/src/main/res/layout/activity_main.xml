@@ -1,8 +1,88 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:text="No demo yet"
-    android:textSize="50sp"/>
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/TextViewPrimary"
+        android:text="XRouter"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_userinfo"
+            style="@style/ButtonPrimary"
+            android:text="UserInfoFragment"/>
+
+        <Button
+            android:id="@+id/btn_webview"
+            style="@style/ButtonPrimary"
+            android:layout_marginTop="15dp"
+            android:text="WebViewFragment"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_login"
+                style="@style/ButtonPrimary"
+                android:layout_margin="5dp"
+                android:minWidth="120dp"
+                android:text="Login"/>
+
+            <Button
+                android:id="@+id/btn_logout"
+                style="@style/ButtonPrimary"
+                android:layout_margin="5dp"
+                android:minWidth="120dp"
+                android:text="Logout"/>
+
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="260dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="45dp"
+            android:gravity="center"
+            android:hint="input test content"
+            android:textSize="15dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_logger"
+                style="@style/ButtonPrimary"
+                android:layout_margin="5dp"
+                android:minWidth="120dp"
+                android:text="Logger"/>
+
+            <Button
+                android:id="@+id/btn_text"
+                style="@style/ButtonPrimary"
+                android:layout_margin="5dp"
+                android:minWidth="120dp"
+                android:text="TextFragment"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

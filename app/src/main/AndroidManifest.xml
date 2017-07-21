@@ -1,17 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.togojoy.trouter.demo">
+          package="com.mondyxue.xrouter.demo">
 
     <application
+        android:name=".DemoApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.activity.ContanierActivity"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <activity
+            android:name=".ui.activity.WebViewActivity"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <activity
+            android:name="com.mondyxue.xrouter.activity.ReforwardActivity">
+            <intent-filter>
+                <data
+                    android:host="mondyxue.github.io"
+                    android:scheme="xrouter"/>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:host="mondyxue.github.io"
+                    android:scheme="http"/>
+                <data
+                    android:host="mondyxue.github.io"
+                    android:scheme="https"/>
             </intent-filter>
         </activity>
 

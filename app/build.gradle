@@ -5,9 +5,9 @@ android {
 
     defaultConfig {
 
-        applicationId 'com.togojoy.trouter.demo'
+        applicationId 'com.mondyxue.xrouter.demo'
         versionCode 1
-        versionName "0.4"
+        versionName "1.0"
 
     }
 

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TRouter.iml" filepath="$PROJECT_DIR$/TRouter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/trouter/trouter.iml" filepath="$PROJECT_DIR$/trouter/trouter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xrouter.iml" filepath="$PROJECT_DIR$/xrouter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xrouter/xrouter-xrouter.iml" filepath="$PROJECT_DIR$/xrouter/xrouter-xrouter.iml" />
     </modules>
   </component>
 </project>
