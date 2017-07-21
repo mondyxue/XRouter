@@ -1,0 +1,14 @@
+apply plugin: 'com.android.application'
+apply from: "../buildModule.gradle"
+
+android {
+
+    defaultConfig {
+
+        applicationId 'com.togojoy.trouter.demo'
+        versionCode 1
+        versionName "0.4"
+
+    }
+
+}
