@@ -74,7 +74,7 @@ XRouter.getRouter()
 其它使用
 ---
 >XRouter基于ARouter提供了针对几个常用场景的解决方案
-#### **1. Navigator进阶用法**
+#### **Navigator**
 ##### a. startActivityForResult
 ```java
 //声明返回类型为ActivityNavigator<T>，T为需要解析的回传数据类型
@@ -127,7 +127,7 @@ UserInfo userInfo = userService.getUserInfo();
 Logger logger = navigator.getLogger();
 logger.e("tag", "msg...");
 ```
-##### b. 如果还不满足，继续组合打法
+##### c. 如果还不满足，继续组合打法
 ```java
 import com.mondyxue.xrouter.navigator.Navigator;
 
@@ -146,7 +146,7 @@ Fragment fragment = navigator.fragment();
 IProvider provider = navigator.service();
 navigator.startActivity();
 ```
-#### **2. RouteType**
+#### **RouteType**
 
 ```java
 import com.mondyxue.xrouter.constant.RouteType;
@@ -168,7 +168,7 @@ RouteType.TitlebarFragment = Fragment | WithinTitlebar;
 RouteType.LoginActivity = Activity | Login;
 
 ```
-#### **2. 登录拦截**
+#### **1. 登录拦截**
 ##### a. 配置extras标记
 ```java
 @Route(path = "/page/userInfo", extras = RouteType.LoginFragment)
@@ -280,7 +280,7 @@ public class FragmentInterceptor extends com.mondyxue.xrouter.interceptor.Fragme
     }
 }
 ```
-##### d. 还有个MainIntercepter，用处应该不大，就不在文档写了
+##### 还有个MainIntercepter，用处应该不大，就不在文档写了
 
 ---
 
