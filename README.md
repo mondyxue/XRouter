@@ -1,8 +1,8 @@
-XRouter
+[XRouter](https://github.com/MondyXue/XRouter)
 ===
-### 一种基于[ARouter](https://github.com/alibaba/ARouter)的使用封装方案，实现对ARouter的Retrofit2式使用。
+### 一种基于Arouter的使用封装方案，实现对ARouter的Retrofit式使用。
 
->##### Arouter是阿里巴巴开源的Android平台中对页面、服务提供路由功能的中间件，**没用过的务必点击**[传送门](https://github.com/alibaba/ARouter)
+>##### [ARouter](https://github.com/alibaba/ARouter)是阿里巴巴开源的Android平台中对页面、服务提供路由功能的中间件，**没用过的务必点击**[传送门](https://github.com/alibaba/ARouter)
 
 ---
 
@@ -74,8 +74,10 @@ XRouter.getRouter()
 其它使用
 ---
 >XRouter基于ARouter提供了针对几个常用场景的解决方案
+
 #### **Navigator**
 ##### a. startActivityForResult
+
 ```java
 //声明返回类型为ActivityNavigator<T>，T为需要解析的回传数据类型
 @Route(path = "/page/login")
@@ -107,7 +109,7 @@ XRouter.getRouter()
                Toast.makeText(MainActivity.this, "login success: " + data.toString(), Toast.LENGTH_SHORT).show();
             }
         });
-```
+````
 
 ##### b. 获取服务
 ```java
@@ -146,6 +148,7 @@ Fragment fragment = navigator.fragment();
 IProvider provider = navigator.service();
 navigator.startActivity();
 ```
+
 #### **RouteType**
 
 ```java
@@ -280,7 +283,7 @@ public class FragmentInterceptor extends com.mondyxue.xrouter.interceptor.Fragme
     }
 }
 ```
-##### 还有个MainIntercepter，用处应该不大，就不在文档写了
+###### 还有个MainIntercepter，可用于主界面(RouteType.Main)的跳转拦截，详见Demo代码
 
 ---
 
@@ -299,6 +302,6 @@ public class FragmentInterceptor extends com.mondyxue.xrouter.interceptor.Fragme
 ---
 小弟不才，第一次分享代码到Github，码代码这茬，一个人容易出事，而且项目来不及写注释，所以特此贴上Q群二维码，如果大家有什么建议和槽点，欢迎能够多多交流。
 
-[Demo下载](https://raw.githubusercontent.com/MondyXue/XRouter/master/static/demo.apk)
-
+[Demo源码](https://github.com/MondyXue/XRouter)、[Demo下载](https://raw.githubusercontent.com/MondyXue/XRouter/master/static/demo.apk)
+ 
 ![](https://raw.githubusercontent.com/MondyXue/XRouter/master/static/qrcode_xrouter_group.png)
