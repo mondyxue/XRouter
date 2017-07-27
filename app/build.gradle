@@ -4,11 +4,13 @@ apply from: "../buildModule.gradle"
 android {
 
     defaultConfig {
-
         applicationId 'com.mondyxue.xrouter.demo'
         versionCode 1
         versionName "1.0"
-
     }
 
+}
+
+dependencies {
+    implementation project(':xrouter')
 }

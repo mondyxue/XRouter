@@ -5,8 +5,8 @@ import android.os.Handler;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * Scheduler for post runnable to ui thread or worker thread
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface Scheduler{
 

@@ -27,6 +27,7 @@
             android:name=".ui.activity.WebViewActivity"
             android:windowSoftInputMode="adjustResize"/>
 
+        <!-- register the ReforwardActivity for uri filter-->
         <activity
             android:name="com.mondyxue.xrouter.activity.ReforwardActivity">
             <intent-filter>

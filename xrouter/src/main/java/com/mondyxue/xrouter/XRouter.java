@@ -9,8 +9,7 @@ import com.mondyxue.xrouter.navigator.Router;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public class XRouter{
 
@@ -19,6 +18,10 @@ public class XRouter{
 
     private static Router sRouter;
 
+    /**
+     * Instead of using {@link ARouter#getInstance()}
+     * @return instance with all the features of the router
+     */
     public static Router getRouter(){
         if(sRouter == null){
             sRouter = (Router) ARouter.getInstance().build(Router.PATH).navigation();
@@ -26,17 +29,20 @@ public class XRouter{
         return sRouter;
     }
 
+    /** Instead of using {@link ARouter#init(Application)} */
     public static void init(Application application){
         ARouter.init(application);
     }
 
+    /** Scheme setting for building route uri */
     public static void setScheme(String scheme){
         SCHEME = scheme;
     }
+    /** Authority setting for building route uri */
     public static void setAuthority(String authority){
         AUTHORITY = authority;
     }
-
+    /** invoke this when Instant Run is enable */
     public static synchronized void openDebug(){
         ARouter.openDebug();
     }

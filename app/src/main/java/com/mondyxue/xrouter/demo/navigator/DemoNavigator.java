@@ -10,8 +10,8 @@ import com.mondyxue.xrouter.demo.service.UserService;
 import com.mondyxue.xrouter.navigator.ActivityNavigator;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * Navigator for demo pages and services
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface DemoNavigator{
 
@@ -25,37 +25,46 @@ public interface DemoNavigator{
     String _Logger = "/service/Logger";
     String _UserService = "/service/UserService";
 
+    /**
+     * navigation to {@link com.mondyxue.xrouter.demo.ui.fragment.TextFragment} with container acitivity
+     * @see com.mondyxue.xrouter.demo.interceptor.FragmentInterceptor
+     */
     @Route(path = _TextFragment, title = "TextFragment")
     void toTextFragment(
             @Extra(Extras.Text) String text
     );
 
-    @Route(path = _LoginFragment)
-    ActivityNavigator<UserInfo> toLoginFragment();
-
+    /**
+     * navigation to {@link com.mondyxue.xrouter.demo.ui.fragment.UserInfoFragment} with container acitivity
+     * @see com.mondyxue.xrouter.demo.interceptor.FragmentInterceptor
+     */
     @Route(path = _UserInfoFragment, title = "UserInfoFragment")
     void toUserInfoFragment();
 
-/*
-    @Route(path = _MainActivity, flags = Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP)
-    void toMainActivity(
-            @Extra(RouteExtras.Action) String action
-    );
-*/
+    /** navigation to {@link com.mondyxue.xrouter.demo.ui.fragment.LoginFragment} with container acitivity by {@link ActivityNavigator} */
+    @Route(path = _LoginFragment)
+    ActivityNavigator<UserInfo> toLoginFragment();
 
+    /**
+     * navigation to {@link com.mondyxue.xrouter.constant.RouteType#Main} activity with extras
+     * @see com.mondyxue.xrouter.demo.interceptor.MainInterceptor
+     */
     @Route(path = _MainActivity)
     void toMainActivity(
             @Extra(RouteExtras.Action) String action
     );
 
+    /** navigation to activity with extras */
     @Route(path = _WebActivity)
     void toWebViewActivity(
             @Extra(Extras.Url) String url
     );
 
+    /** navigation to service {@link Logger} */
     @Route(path = _Logger)
     Logger getLogger();
 
+    /** navigation to service {@link UserService} */
     @Route(path = _UserService)
     UserService getUserService();
 

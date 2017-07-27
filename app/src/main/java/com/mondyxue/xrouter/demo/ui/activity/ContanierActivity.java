@@ -12,6 +12,10 @@ import com.mondyxue.xrouter.constant.RouteType;
 import com.mondyxue.xrouter.demo.R;
 import com.mondyxue.xrouter.demo.navigator.DemoNavigator;
 
+/**
+ * Contanier activity for {@link com.mondyxue.xrouter.demo.interceptor.FragmentInterceptor}
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ */
 @Route(path = DemoNavigator._ContanierActivity, extras = RouteType.Activity | RouteType.GreenChannel)
 public class ContanierActivity extends BaseActivity{
 

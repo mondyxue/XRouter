@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package com.mondyxue.xrouter.navigator.impl;
 
 import android.net.Uri;
@@ -21,6 +16,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * A navigator builder replaced by {@link Postcard}
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ */
 public final class NavigatorBuilder{
 
     private Postcard mPostcard;

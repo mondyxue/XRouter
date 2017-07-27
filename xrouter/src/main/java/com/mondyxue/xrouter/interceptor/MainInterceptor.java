@@ -7,8 +7,8 @@ import com.alibaba.android.arouter.facade.callback.InterceptorCallback;
 import com.mondyxue.xrouter.utils.RouteTypeUtils;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * A interceptor for checking {@link com.mondyxue.xrouter.constant.RouteType#Main}
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public abstract class MainInterceptor extends RouteTypeInterceptor{
 

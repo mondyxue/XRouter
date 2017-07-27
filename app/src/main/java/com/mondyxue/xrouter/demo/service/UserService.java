@@ -3,8 +3,8 @@ package com.mondyxue.xrouter.demo.service;
 import com.mondyxue.xrouter.demo.data.UserInfo;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * Demo service for userinfo
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface UserService{
 

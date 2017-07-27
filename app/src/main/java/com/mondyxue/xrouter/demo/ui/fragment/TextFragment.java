@@ -11,8 +11,7 @@ import com.mondyxue.xrouter.demo.constant.Extras;
 import com.mondyxue.xrouter.demo.navigator.DemoNavigator;
 
 /**
- * <br>Created by MondyXue
- * <br>E-Mail: mondyxue@gmail.com
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = DemoNavigator._TextFragment, extras = RouteType.Fragment)
 public class TextFragment extends BaseFragment{
@@ -27,7 +26,7 @@ public class TextFragment extends BaseFragment{
 
             String text = arguments.getString(Extras.Text);
 
-            TextView tvText = (TextView) rootView.findViewById(R.id.tv_text);
+            TextView tvText = rootView.findViewById(R.id.tv_text);
             tvText.setText(text);
 
         }

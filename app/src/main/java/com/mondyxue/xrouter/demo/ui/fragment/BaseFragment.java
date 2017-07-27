@@ -13,8 +13,7 @@ import com.mondyxue.xrouter.XRouter;
 import com.mondyxue.xrouter.demo.R;
 
 /**
- * <br>Created by MondyXue
- * <br>E-Mail: mondyxue@gmail.com
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public abstract class BaseFragment extends Fragment{
 
@@ -29,7 +28,7 @@ public abstract class BaseFragment extends Fragment{
                 }
             });
         }
-        mTvTitle = (TextView) getActivity().findViewById(R.id.tv_title);
+        mTvTitle = getActivity().findViewById(R.id.tv_title);
         initView(rootView);
         return rootView;
     }
@@ -51,6 +50,7 @@ public abstract class BaseFragment extends Fragment{
 
     @Override public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
+        // handle the activity result
         XRouter.getRouter()
                .getActivityManager()
                .onActivityResult(getActivity(), requestCode, resultCode, data);

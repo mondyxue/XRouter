@@ -11,24 +11,47 @@ import com.mondyxue.xrouter.service.ActivityManager;
 import com.mondyxue.xrouter.service.Scheduler;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * Router with support features
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface Router{
 
     String PATH = "/xrouter/navigator";
-    String FRAGMENT_CONTAINER = "/xrouter/page/container";
 
+    /**
+     * Inject params and services
+     * @param container Activity or Fragment
+     */
+    void inject(Object container);
+
+    /**
+     * Create a navigator with interfaces
+     * @param navigator the interfaces
+     * @return the delegate of your navigator interfaces
+     */
     <T> T create(Class<T> navigator);
 
+    /** Getting a service with path */
     <T> T service(String path);
 
+    /** Create a {@link NavigatorBuilder} with intent */
     NavigatorBuilder build(Intent intent);
+
+    /** Create a {@link NavigatorBuilder} with path */
     NavigatorBuilder build(String path);
+
+    /** Create a {@link NavigatorBuilder} with uri */
     NavigatorBuilder build(Uri uri);
 
+    /**
+     * Invoke startActivityForResult with a callback
+     * @param postcard    route postcard
+     * @param requestCode requestCode
+     * @param callback    callback for getting the result and data
+     */
     void startActivityForResult(Postcard postcard, int requestCode, RouteCallback callback);
 
+    /** Getting the top activity or application context */
     Context getContext();
 
     ActivityManager getActivityManager();

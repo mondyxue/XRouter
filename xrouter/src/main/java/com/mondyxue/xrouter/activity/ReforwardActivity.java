@@ -11,6 +11,10 @@ import com.mondyxue.xrouter.constant.RouteExtras;
 import com.mondyxue.xrouter.navigator.Router;
 import com.mondyxue.xrouter.navigator.impl.NavigatorBuilder;
 
+/**
+ * Activity for processing the postcard and reforwarding it to the target
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ */
 public class ReforwardActivity extends Activity{
 
     @Override
@@ -24,30 +28,26 @@ public class ReforwardActivity extends Activity{
                                 postcard.getExtras().getInt(RouteExtras.RequestCode, -1),
                                 new NavigationCallbackWrapper(new NavigationCallback(){
                                     @Override public void onFound(Postcard postcard){
-                                        if(!isFinishing()){
-                                            finish();
-                                        }
+                                        safeFinish();
                                     }
                                     @Override public void onLost(Postcard postcard){
-                                        if(!isFinishing()){
-                                            finish();
-                                        }
+                                        safeFinish();
                                     }
                                     @Override public void onArrival(Postcard postcard){
-                                        if(!isFinishing()){
-                                            finish();
-                                        }
+                                        safeFinish();
                                     }
                                     @Override public void onInterrupt(Postcard postcard){
-                                        if(!isFinishing()){
-                                            finish();
-                                        }
+                                        safeFinish();
                                     }
                                 }));
         }else{
-            if(!isFinishing()){
-                finish();
-            }
+            safeFinish();
+        }
+    }
+
+    protected void safeFinish(){
+        if(!isFinishing()){
+            finish();
         }
     }
 

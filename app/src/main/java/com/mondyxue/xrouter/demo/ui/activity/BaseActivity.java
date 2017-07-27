@@ -37,6 +37,7 @@ public abstract class BaseActivity extends FragmentActivity{
 
     @Override protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
+        // handle the activity result
         XRouter.getRouter()
                .getActivityManager()
                .onActivityResult(BaseActivity.this, requestCode, resultCode, data);

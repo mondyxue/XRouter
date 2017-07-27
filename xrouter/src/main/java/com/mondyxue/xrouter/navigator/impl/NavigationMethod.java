@@ -23,8 +23,8 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * A helper for invoking navigator's method
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 final class NavigationMethod{
 
@@ -35,6 +35,7 @@ final class NavigationMethod{
     private DefaultExtras mDefaultExtras;
 
     NavigationMethod(Method method){
+        // init annotations
         mReturnType = method.getReturnType();
         mParameterAnnotations = method.getParameterAnnotations();
         Annotation[] methodAnnotations = method.getAnnotations();
@@ -74,6 +75,7 @@ final class NavigationMethod{
                                      .withFlags(mRoute.flags())
                                      .navigator();
 
+        // check to return
         Class<?> returnType = mReturnType;
         if(returnType == Void.TYPE){
             navigator.startActivity();
@@ -111,6 +113,7 @@ final class NavigationMethod{
     private IBundleWrapper processExtras(Object[] args){
         IBundleWrapper bundle = new BundleWrapper();
         bundle.put(RouteExtras.Title, mRoute.title());
+        // process parameter annotations
         for(int i = 0; i < mParameterAnnotations.length; i++){
             Annotation[] annotations = mParameterAnnotations[i];
             for(Annotation annotation : annotations){
@@ -141,6 +144,7 @@ final class NavigationMethod{
                 }
             }
         }
+        // process default extras
         if(mDefaultExtras != null){
             int[] types = mDefaultExtras.type();
             String[] keys = mDefaultExtras.key();

@@ -26,7 +26,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     @Override protected void init(){
-        mEtContent = ((EditText) findViewById(R.id.et_content));
+        mEtContent = findViewById(R.id.et_content);
         findViewById(R.id.btn_webview).setOnClickListener(MainActivity.this);
         findViewById(R.id.btn_userinfo).setOnClickListener(MainActivity.this);
         findViewById(R.id.btn_login).setOnClickListener(MainActivity.this);

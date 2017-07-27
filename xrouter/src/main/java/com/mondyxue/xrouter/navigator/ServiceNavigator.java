@@ -3,8 +3,8 @@ package com.mondyxue.xrouter.navigator;
 import com.alibaba.android.arouter.facade.template.IProvider;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * A service navigator
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface ServiceNavigator{
 

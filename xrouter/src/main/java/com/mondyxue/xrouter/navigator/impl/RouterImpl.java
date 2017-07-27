@@ -10,6 +10,7 @@ import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.facade.template.IProvider;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.mondyxue.xrouter.XRouter;
 import com.mondyxue.xrouter.callback.NavigationCallbackWrapper;
 import com.mondyxue.xrouter.callback.RouteCallback;
@@ -26,8 +27,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * The implementation of {@link Router}
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = Router.PATH, extras = RouteType.GreenService)
 public class RouterImpl implements IProvider, Router, ActivityManager.OnActivityResultListener{
@@ -61,6 +62,10 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
         mScheduler = scheduler;
     }
 
+    @Override public void inject(Object container){
+        ARouter.getInstance().inject(container);
+    }
+
     @Override public <T> T create(final Class<T> navigator){
         if(!navigator.isInterface()){
             throw new IllegalArgumentException("navigator declarations must be interfaces.");
@@ -70,6 +75,7 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
         LruCache<Class<?>,Object> navigators = getNavigators();
         Object o = navigators.get(navigator);
         if(o == null){
+            // create the proxy for navigator interfaces
             o = Proxy.newProxyInstance(navigator.getClassLoader(), new Class[]{navigator}, new InvocationHandler(){
                 LruCache<Method,NavigationMethod> mNavigatorMethods;
                 @Override public Object invoke(Object proxy, Method method, Object[] args) throws Throwable{
@@ -78,6 +84,7 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
                     }
                     NavigationMethod navigationMethod = mNavigatorMethods.get(method);
                     if(navigationMethod == null){
+                        // create method's processer
                         navigationMethod = new NavigationMethod(method);
                         mNavigatorMethods.put(method, navigationMethod);
                     }
@@ -93,6 +100,7 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
         LruCache<String,Object> routeServices = getServices();
         Object o = routeServices.get(path);
         if(o == null){
+            // navigating with service route
             o = build(path).navigator().service();
             if(o != null){
                 routeServices.put(path, o);
@@ -107,15 +115,19 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
         if(context instanceof Activity && requestCode > 0){
             Activity activity = (Activity) context;
             if(callback != null){
+                // hold the callback
                 getRouteCallbacks().put(activity, callback);
             }
             Intent intent = activity.getIntent();
             if(intent != null){
+                // with the path from
                 postcard.withString(RouteExtras.PathFrom, intent.getStringExtra(RouteExtras.PathTo));
             }
+            // with request code
             postcard.withInt(RouteExtras.RequestCode, requestCode);
             postcard.navigation(activity, requestCode, new NavigationCallbackWrapper(new NavigationCallback(){
                 @Override public void onLost(Postcard postcard){
+                    // remove the callback and invoke onCancel when the postcard lost
                     RouteCallback routeCallback = getRouteCallbacks().remove(context);
                     if(routeCallback != null){
                         routeCallback.onCancel();
@@ -132,6 +144,7 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
 
     @Override public void onActivityResult(Activity context, int requestCode, int resultCode, Intent data){
         if(context != null){
+            //dispatch the callback
             RouteCallback routeCallback = getRouteCallbacks().remove(context);
             if(routeCallback != null){
                 routeCallback.onResponse(requestCode, resultCode, data);
@@ -150,26 +163,29 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
         if(data == null){
             String path = intent.getStringExtra(RouteExtras.PathTo);
             if(path != null){
-                return XRouter.getRouter().build(path);
+                return build(path).with(intent.getExtras());
             }
         }else{
-            return build(data);
+            return build(data).with(intent.getExtras());
         }
         throw new IllegalArgumentException("can't create a NavigatorBuilder without uri and path");
     }
 
+    /** get or create services cache */
     private LruCache<String,Object> getServices(){
         if(mServices == null){
             mServices = new LruCache<>(6);
         }
         return mServices;
     }
+    /** get or create navigators cache */
     private LruCache<Class<?>,Object> getNavigators(){
         if(mNavigators == null){
             mNavigators = new LruCache<>(5);
         }
         return mNavigators;
     }
+    /** get or create callbacks holder */
     private Map<Activity,RouteCallback> getRouteCallbacks(){
         if(mRouteCallbacks == null){
             mRouteCallbacks = new HashMap<>();

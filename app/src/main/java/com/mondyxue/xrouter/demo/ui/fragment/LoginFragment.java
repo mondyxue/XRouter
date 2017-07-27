@@ -17,8 +17,7 @@ import com.mondyxue.xrouter.demo.navigator.DemoNavigator;
 import com.mondyxue.xrouter.demo.service.UserService;
 
 /**
- * <br>Created by MondyXue
- * <br>E-Mail: mondyxue@gmail.com
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = DemoNavigator._LoginFragment, extras = RouteType.TitlebarFragment)
 public class LoginFragment extends BaseFragment{
@@ -30,15 +29,17 @@ public class LoginFragment extends BaseFragment{
 
     @Override protected void initView(View rootView){
 
-        mEtUserId = ((EditText) rootView.findViewById(R.id.et_userId));
+        mEtUserId = rootView.findViewById(R.id.et_userId);
 
         rootView.findViewById(R.id.btn_login)
                 .setOnClickListener(new View.OnClickListener(){
                     @Override public void onClick(View v){
 
+                        //create a navigator with interfaces
                         DemoNavigator navigator = XRouter.getRouter()
                                                          .create(DemoNavigator.class);
 
+                        //get a service by navigator
                         UserService userService = navigator.getUserService();
 
                         long userId;
@@ -57,6 +58,7 @@ public class LoginFragment extends BaseFragment{
 
                         Toast.makeText(getActivity(), "login success: " + userInfo.toString(), Toast.LENGTH_SHORT).show();
 
+                        //set result for startActivityForResult
                         Intent data = new Intent().putExtra(Extras.UserInfo, userInfo);
                         getActivity().setResult(ResultCode.SUCCESS, data);
                         getActivity().finish();

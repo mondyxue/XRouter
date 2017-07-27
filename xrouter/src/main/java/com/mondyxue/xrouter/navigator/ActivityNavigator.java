@@ -6,15 +6,23 @@ import android.net.Uri;
 import com.mondyxue.xrouter.callback.RouteCallback;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * A activity navigator
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface ActivityNavigator<T>{
 
     void startActivity();
+
+    /**
+     * startActivityForResult with callback
+     * @param callback callback for processing result
+     */
     void startActivityForResult(RouteCallback<T> callback);
 
+    /** return the target uri */
     Uri uri();
+
+    /** return the reforward intent */
     Intent intent();
 
 }

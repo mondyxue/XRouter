@@ -1,8 +1,7 @@
 package com.mondyxue.xrouter.constant;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public class ResultCode{
 

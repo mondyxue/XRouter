@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <br></br>Created by MondyXue
- * <br></br>E-MAIL: mondyxue@gmial.com
+ * The implementation of {@link IBundleWrapper}
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public class BundleWrapper implements IBundleWrapper{
 

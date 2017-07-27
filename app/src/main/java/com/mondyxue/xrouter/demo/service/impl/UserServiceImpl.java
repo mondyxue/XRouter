@@ -10,8 +10,8 @@ import com.mondyxue.xrouter.demo.navigator.DemoNavigator;
 import com.mondyxue.xrouter.demo.service.UserService;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * The implementation of {@link UserService}
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = DemoNavigator._UserService, extras = RouteType.GreenService)
 public class UserServiceImpl implements UserService, IProvider{

@@ -1,5 +1,6 @@
 package com.mondyxue.xrouter.demo.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,8 +14,7 @@ import com.mondyxue.xrouter.demo.constant.Extras;
 import com.mondyxue.xrouter.demo.navigator.DemoNavigator;
 
 /**
- * <br>Created by MondyXue
- * <br>E-Mail: mondyxue@gmail.com
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = DemoNavigator._WebActivity, extras = RouteType.Activity | RouteType.GreenChannel)
 public class WebViewActivity extends BaseActivity{
@@ -25,9 +25,10 @@ public class WebViewActivity extends BaseActivity{
         return R.layout.activity_webview;
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override protected void init(){
 
-        mWebView = (WebView) findViewById(R.id.webview);
+        mWebView = findViewById(R.id.webview);
 
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebChromeClient(new WebChromeClient(){

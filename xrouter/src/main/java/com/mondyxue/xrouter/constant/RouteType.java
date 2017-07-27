@@ -2,12 +2,14 @@ package com.mondyxue.xrouter.constant;
 
 import android.support.annotation.IntDef;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * Flags for using as extras in {@link Route#extras()}
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @IntDef(flag = true, value = {
         RouteType.GreenChannel,

@@ -9,8 +9,8 @@ import com.mondyxue.xrouter.constant.AcitivityStatus;
 import java.util.List;
 
 /**
- * <br></br>Created by MondyXue
- * <br></br>E-MAIL: mondyxue@gmial.com
+ * A manager for listening activity's lifecycle
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface ActivityManager{
 
@@ -18,6 +18,10 @@ public interface ActivityManager{
 
     void updateActivity(Activity activity, @AcitivityStatus int status);
 
+    /**
+     * return the top activity or the application context
+     * @see #getTopActivity()
+     */
     Context getContext();
 
     Activity getTopActivity();
@@ -30,6 +34,9 @@ public interface ActivityManager{
     void finishActivities(Class<? extends Activity> clazz);
     void finishAllActivity();
 
+    /**
+     * return true if no activity in the forground else false
+     */
     boolean isOnBackground();
 
     void safeFinish(Activity activity);
@@ -40,13 +47,23 @@ public interface ActivityManager{
     void addOnActivityResultListener(OnActivityResultListener listener);
     void removeOnActivityResultListener(OnActivityResultListener listener);
 
+    /** Invoke this in {@link Activity#onActivityResult(int, int, Intent)} for dispatching to {@link OnActivityResultListener} */
     void onActivityResult(Activity context, int requestCode, int resultCode, Intent data);
 
+    /**
+     * Using this for listening {@link Activity#onActivityResult(int, int, Intent)}
+     * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+     */
     interface OnActivityResultListener{
 
         void onActivityResult(Activity context, int requestCode, int resultCode, Intent data);
     }
 
+    /**
+     * Using this for listening activity's lifecycle
+     * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+     * @see Activity
+     */
     interface OnStatusChangedListener{
 
         void onCreated(Activity activity);

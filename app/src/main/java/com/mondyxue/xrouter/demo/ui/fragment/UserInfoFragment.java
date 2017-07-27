@@ -11,8 +11,7 @@ import com.mondyxue.xrouter.demo.data.UserInfo;
 import com.mondyxue.xrouter.demo.navigator.DemoNavigator;
 
 /**
- * <br>Created by MondyXue
- * <br>E-Mail: mondyxue@gmail.com
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = DemoNavigator._UserInfoFragment, extras = RouteType.LoginFragment)
 public class UserInfoFragment extends BaseFragment{
@@ -26,7 +25,7 @@ public class UserInfoFragment extends BaseFragment{
                                    .create(DemoNavigator.class)
                                    .getUserService()
                                    .getUserInfo();
-        TextView tvText = (TextView) rootView.findViewById(R.id.tv_text);
+        TextView tvText = rootView.findViewById(R.id.tv_text);
         tvText.setText(userInfo.toString());
     }
 

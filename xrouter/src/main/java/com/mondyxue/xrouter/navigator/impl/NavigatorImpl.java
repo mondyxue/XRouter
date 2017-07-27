@@ -15,8 +15,8 @@ import com.mondyxue.xrouter.navigator.Navigator;
 import com.mondyxue.xrouter.utils.TypeUtils;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * The implementation of {@link Navigator}
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 class NavigatorImpl implements Navigator{
 
@@ -42,6 +42,7 @@ class NavigatorImpl implements Navigator{
         int requestCode = -1;
         Bundle extras = mPostcard.getExtras();
         if(extras != null){
+            // check the request code
             requestCode = extras.getInt(RouteExtras.RequestCode, requestCode);
             if(requestCode == -1){
                 requestCode = 200;
@@ -69,6 +70,7 @@ class NavigatorImpl implements Navigator{
             for(String key : extras.keySet()){
                 Object value = extras.get(key);
                 if(value != null){
+                    // check the value's type
                     if(TypeUtils.isFundamentalType(value)){
                         builder.appendQueryParameter(key, value.toString());
                     }else{
@@ -81,6 +83,7 @@ class NavigatorImpl implements Navigator{
     }
 
     @Override public Intent intent(){
+        //build a reforwaring activity intent for processing the target
         Intent intent = new Intent(XRouter.getRouter().getContext(), ReforwardActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Uri uri = mPostcard.getUri();

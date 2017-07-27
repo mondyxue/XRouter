@@ -3,8 +3,8 @@ package com.mondyxue.xrouter.demo.service;
 import android.support.annotation.NonNull;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * Demo service for logger
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface Logger{
 

@@ -3,8 +3,7 @@ package com.mondyxue.xrouter.utils;
 import com.mondyxue.xrouter.constant.RouteType;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public final class RouteTypeUtils{
 

@@ -17,8 +17,8 @@ import com.mondyxue.xrouter.utils.RouteTypeUtils;
 import java.util.Map;
 
 /**
- * <br>Created by MondyXue
- * <br>E-MAIL: mondyxue@gmial.com
+ * A interceptor for checking {@link com.mondyxue.xrouter.constant.RouteType#Fragment}
+ * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public abstract class FragmentInterceptor extends RouteTypeInterceptor{
 
@@ -45,6 +45,7 @@ public abstract class FragmentInterceptor extends RouteTypeInterceptor{
                                callback.onInterrupt(new RuntimeException("postcard been interrupted"));
                            }
                        };
+                       // redirect to container activity
                        Context context = XRouter.getRouter().getContext();
                        int requestCode = postcard.getExtras().getInt(RouteExtras.RequestCode);
                        if(requestCode > 0 && context instanceof Activity){
