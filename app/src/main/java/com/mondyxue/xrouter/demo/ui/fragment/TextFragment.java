@@ -7,8 +7,9 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mondyxue.xrouter.constant.RouteType;
 import com.mondyxue.xrouter.demo.R;
-import com.mondyxue.xrouter.demo.constant.Extras;
-import com.mondyxue.xrouter.demo.navigator.DemoNavigator;
+import com.mondyxue.xrouter.demo.base.ui.fragment.BaseFragment;
+import com.mondyxue.xrouter.demo.api.constant.Extras;
+import com.mondyxue.xrouter.demo.api.navigator.DemoNavigator;
 
 /**
  * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>

@@ -12,9 +12,13 @@ import com.mondyxue.xrouter.XRouter;
 import com.mondyxue.xrouter.constant.RouteExtras;
 import com.mondyxue.xrouter.constant.RouteType;
 import com.mondyxue.xrouter.demo.R;
-import com.mondyxue.xrouter.demo.callback.UserInfoCallback;
-import com.mondyxue.xrouter.demo.data.UserInfo;
-import com.mondyxue.xrouter.demo.navigator.DemoNavigator;
+import com.mondyxue.xrouter.demo.api.callback.UserInfoCallback;
+import com.mondyxue.xrouter.demo.api.data.UserInfo;
+import com.mondyxue.xrouter.demo.api.navigator.BaseNavigator;
+import com.mondyxue.xrouter.demo.api.navigator.DemoNavigator;
+import com.mondyxue.xrouter.demo.api.navigator.LoginNavigator;
+import com.mondyxue.xrouter.demo.api.navigator.WebNavigator;
+import com.mondyxue.xrouter.demo.base.ui.activity.BaseActivity;
 
 @Route(path = DemoNavigator._MainActivity, extras = RouteType.MainActivity)
 public class MainActivity extends BaseActivity implements View.OnClickListener{
@@ -47,7 +51,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         case R.id.btn_login:
             XRouter.getRouter()
-                   .create(DemoNavigator.class)
+                   .create(LoginNavigator.class)
                    .toLoginFragment()
                    .startActivityForResult(new UserInfoCallback(){
                        @Override public void onResponse(@NonNull UserInfo data){
@@ -58,7 +62,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         case R.id.btn_logout:
             XRouter.getRouter()
-                   .create(DemoNavigator.class)
+                   .create(LoginNavigator.class)
                    .getUserService()
                    .logout();
             Toast.makeText(MainActivity.this, "logout success!", Toast.LENGTH_SHORT).show();
@@ -66,7 +70,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         case R.id.btn_logger:
             XRouter.getRouter()
-                   .create(DemoNavigator.class)
+                   .create(BaseNavigator.class)
                    .getLogger()
                    .e("onClick", "Logger", mEtContent.getText().toString());
             break;
@@ -79,7 +83,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         case R.id.btn_webview:
             XRouter.getRouter()
-                   .create(DemoNavigator.class)
+                   .create(WebNavigator.class)
                    .toWebViewActivity("file:///android_asset/scheme_test.html");
             break;
 

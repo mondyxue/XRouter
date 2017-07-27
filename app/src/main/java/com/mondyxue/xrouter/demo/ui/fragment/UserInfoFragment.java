@@ -7,8 +7,10 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mondyxue.xrouter.XRouter;
 import com.mondyxue.xrouter.constant.RouteType;
 import com.mondyxue.xrouter.demo.R;
-import com.mondyxue.xrouter.demo.data.UserInfo;
-import com.mondyxue.xrouter.demo.navigator.DemoNavigator;
+import com.mondyxue.xrouter.demo.api.data.UserInfo;
+import com.mondyxue.xrouter.demo.api.navigator.DemoNavigator;
+import com.mondyxue.xrouter.demo.api.navigator.LoginNavigator;
+import com.mondyxue.xrouter.demo.base.ui.fragment.BaseFragment;
 
 /**
  * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
@@ -22,7 +24,7 @@ public class UserInfoFragment extends BaseFragment{
 
     @Override protected void initView(View rootView){
         UserInfo userInfo = XRouter.getRouter()
-                                   .create(DemoNavigator.class)
+                                   .create(LoginNavigator.class)
                                    .getUserService()
                                    .getUserInfo();
         TextView tvText = rootView.findViewById(R.id.tv_text);

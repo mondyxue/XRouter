@@ -12,5 +12,7 @@ android {
 }
 
 dependencies {
-    implementation project(':xrouter')
+    implementation project(':module_base')
+    implementation project(':module_login')
+    implementation project(':module_web')
 }

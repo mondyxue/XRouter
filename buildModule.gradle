@@ -1,7 +1,7 @@
 android {
 
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.1'
 
     defaultConfig {
 
@@ -10,10 +10,16 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [moduleName: project.name]
             }
         }
 
+    }
+
+    android {
+        lintOptions {
+            abortOnError false
+        }
     }
 
 }
@@ -25,4 +31,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
     }
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.2.1'
+
+    if (!'xrouter'.equals(project.name)) {
+        implementation project(':xrouter')
+        if (!'module_api'.equals(project.name)) {
+            implementation project(':module_api')
+            if (!'module_base'.equals(project.name)) {
+                implementation project(':module_base')
+            }
+        }
+    }
+
 }

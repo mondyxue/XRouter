@@ -1,1 +1,1 @@
-include ':app', ':xrouter'
+include ':app', ':xrouter', ':module_login', ':module_base', ':module_api', ':module_web'

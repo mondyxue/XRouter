@@ -20,11 +20,11 @@
         </activity>
 
         <activity
-            android:name=".ui.activity.ContanierActivity"
+            android:name=".base.ui.activity.ContanierActivity"
             android:windowSoftInputMode="adjustResize"/>
 
         <activity
-            android:name=".ui.activity.WebViewActivity"
+            android:name=".web.ui.activity.WebViewActivity"
             android:windowSoftInputMode="adjustResize"/>
 
         <!-- register the ReforwardActivity for uri filter-->
