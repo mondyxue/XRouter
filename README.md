@@ -1,14 +1,17 @@
 XRouter
 ===
-###一种基于[ARouter](https://github.com/alibaba/ARouter)的使用封装方案，实现对ARouter的Retrofit2式使用。
 
->#####Arouter是阿里巴巴开源的Android平台中对页面、服务提供路由功能的中间件，**没用过的务必点击**[传送门](https://github.com/alibaba/ARouter)
+### 一种基于[ARouter](https://github.com/alibaba/ARouter)的使用封装方案，实现对ARouter的Retrofit2式使用。
+
+>##### Arouter是阿里巴巴开源的Android平台中对页面、服务提供路由功能的中间件，**没用过的务必点击**[传送门](https://github.com/alibaba/ARouter)
 
 ---
 
 基础功能
 ---
-####1. 依赖配置
+
+#### 1. 依赖配置
+
 ```groovy
 android {
     defaultConfig {
@@ -34,7 +37,9 @@ repositories {
     }
 }
 ```
-####2. 给目标页面添加注解
+
+#### 2. 给目标页面添加注解
+
 ```java
 import com.alibaba.android.arouter.facade.annotation.Route;
 
@@ -43,7 +48,9 @@ public class WebViewActivity extends BaseActivity{
     ...
 }
 ```
-####3. 在Application中添加初始化代码
+
+#### 3. 在Application中添加初始化代码
+
 ```java
 //初始化uri信息
 XRouter.setScheme("xrouter");
@@ -52,7 +59,9 @@ XRouter.setAuthority("mondyxue.github.io");
 //XRouter初始化
 XRouter.init(DemoApplication.this);
 ```
-####4. 声明Navigator接口
+
+#### 4. 声明Navigator接口
+
 ```java
 import com.mondyxue.xrouter.annotation.Extra;
 import com.mondyxue.xrouter.annotation.Route;
@@ -62,7 +71,9 @@ public interface WebNavigator{
     void openUrl(@Extra("url") String url);
 }
 ```
-####5. 发起路由
+
+#### 5. 发起路由
+
 ```java
 XRouter.getRouter()
        .create(WebNavigator.class)
@@ -73,9 +84,13 @@ XRouter.getRouter()
 
 其它使用
 ---
+
 >XRouter基于ARouter提供了针对几个常用场景的解决方案
-####**1. Navigator进阶用法**
-#####a. startActivityForResult
+
+#### **1. Navigator进阶用法**
+
+##### a. startActivityForResult
+
 ```java
 //声明返回类型为ActivityNavigator<T>，T为需要解析的回传数据类型
 @Route(path = "/page/login")
@@ -109,7 +124,8 @@ XRouter.getRouter()
         });
 ```
 
-#####b. 获取服务
+##### b. 获取服务
+
 ```java
 //声明
 @Route(path = "/service/userService")
@@ -127,7 +143,9 @@ UserInfo userInfo = userService.getUserInfo();
 Logger logger = navigator.getLogger();
 logger.e("tag", "msg...");
 ```
-#####b. 如果还不满足，继续组合打法
+
+##### b. 如果还不满足，继续组合打法
+
 ```java
 import com.mondyxue.xrouter.navigator.Navigator;
 
@@ -146,7 +164,8 @@ Fragment fragment = navigator.fragment();
 IProvider provider = navigator.service();
 navigator.startActivity();
 ```
-####**2. RouteType**
+
+#### **2. RouteType**
 
 ```java
 import com.mondyxue.xrouter.constant.RouteType;
@@ -166,17 +185,20 @@ RouteType.Main//标记此页面是否为App首页
 //组合打法
 RouteType.TitlebarFragment = Fragment | WithinTitlebar;
 RouteType.LoginActivity = Activity | Login;
-
 ```
-####**2. 登录拦截**
-#####a. 配置extras标记
+
+#### **2. 登录拦截**
+##### a. 配置extras标记
+
 ```java
 @Route(path = "/page/userInfo", extras = RouteType.LoginFragment)
 public class UserInfoFragment extends BaseFragment{
     ...
 }
 ```
-#####b. 实现登录拦截器
+
+##### b. 实现登录拦截器
+
 ```java
 @Interceptor(priority = 4, name = "LoginInterceptor")
 public class LoginInterceptor extends com.mondyxue.xrouter.interceptor.LoginInterceptor implements IInterceptor{
@@ -210,15 +232,20 @@ public class LoginInterceptor extends com.mondyxue.xrouter.interceptor.LoginInte
 
 }
 ```
-####**2. Fragment拦截**
-#####a. 配置extras标记
+
+#### **2. Fragment拦截**
+
+##### a. 配置extras标记
+
 ```java
 @Route(path = "/page/text", extras = RouteType.Fragment)
 public class TextFragment extends BaseFragment{
     ...
 }
 ```
-#####b. 配置Fragment容器Activity
+
+##### b. 配置Fragment容器Activity
+
 ```java
 @Route(path = "/page/contanier", extras = RouteType.Activity | RouteType.GreenChannel)
 public class ContanierActivity extends BaseActivity{
@@ -270,7 +297,9 @@ public class ContanierActivity extends BaseActivity{
 
 }
 ```
-#####c. 实现Fragment拦截器
+
+##### c. 实现Fragment拦截器
+
 ```java
 @Interceptor(priority = 8, name = "FragmentInterceptor")
 public class FragmentInterceptor extends com.mondyxue.xrouter.interceptor.FragmentInterceptor implements IInterceptor{
@@ -280,7 +309,8 @@ public class FragmentInterceptor extends com.mondyxue.xrouter.interceptor.Fragme
     }
 }
 ```
-#####d. 还有个MainIntercepter，用处应该不大，就不在文档写了
+
+##### d. 还有个MainIntercepter，用处应该不大，就不在文档写了
 
 ---
 
@@ -288,6 +318,7 @@ public class FragmentInterceptor extends com.mondyxue.xrouter.interceptor.Fragme
 ---
 
 如果你使用混淆并且用到Fragment拦截器的话，需要在混淆配置中添加以下规则:
+
 ```
 #XRouter:使用Fragment拦截器
 -keep class com.alibaba.android.arouter.facade.Postcard{*;}
@@ -297,6 +328,7 @@ public class FragmentInterceptor extends com.mondyxue.xrouter.interceptor.Fragme
 
 后话
 ---
+
 小弟不才，第一次分享代码到Github，码代码这茬，一个人容易出事，所以特此贴上Q群二维码，如果大家有什么建议和槽点，欢迎能够多多交流。
 
 [Demo下载](https://github.com/MondyXue/XRouter/static/demo.apk)
