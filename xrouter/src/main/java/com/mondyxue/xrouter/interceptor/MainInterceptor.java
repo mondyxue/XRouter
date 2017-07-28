@@ -8,7 +8,7 @@ import com.mondyxue.xrouter.utils.RouteTypeUtils;
 
 /**
  * A interceptor for checking {@link com.mondyxue.xrouter.constant.RouteType#Main}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public abstract class MainInterceptor extends RouteTypeInterceptor{
 

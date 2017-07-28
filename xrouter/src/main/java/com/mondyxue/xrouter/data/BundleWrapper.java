@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * The implementation of {@link IBundleWrapper}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public class BundleWrapper implements IBundleWrapper{
 

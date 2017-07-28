@@ -28,16 +28,17 @@ import java.util.Map;
 
 /**
  * The implementation of {@link Router}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = Router.PATH, extras = RouteType.GreenService)
 public class RouterImpl implements IProvider, Router, ActivityManager.OnActivityResultListener{
 
-    private ActivityManager mActivityManager;
-    private LruCache<String,Object> mServices;
-    private LruCache<Class<?>,Object> mNavigators;
-    private Map<Activity,RouteCallback> mRouteCallbacks;
     private Scheduler mScheduler;
+    private ActivityManager mActivityManager;
+
+    private LruCache<String,Object> mServiceCache;
+    private LruCache<Class<?>,Object> mNavigatorCache;
+    private Map<Activity,RouteCallback> mRouteCallbackHolder;
 
     @Override public void init(Context context){}
     @Override public Context getContext(){
@@ -72,7 +73,7 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
         }else if(navigator.getInterfaces().length > 0){
             throw new IllegalArgumentException("navigator interfaces must not extend other interfaces.");
         }
-        LruCache<Class<?>,Object> navigators = getNavigators();
+        LruCache<Class<?>,Object> navigators = getNavigatorCache();
         Object o = navigators.get(navigator);
         if(o == null){
             // create the proxy for navigator interfaces
@@ -97,7 +98,7 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
     }
 
     @Override public <T> T service(String path){
-        LruCache<String,Object> routeServices = getServices();
+        LruCache<String,Object> routeServices = getServiceCache();
         Object o = routeServices.get(path);
         if(o == null){
             // navigating with service route
@@ -116,7 +117,7 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
             Activity activity = (Activity) context;
             if(callback != null){
                 // hold the callback
-                getRouteCallbacks().put(activity, callback);
+                getRouteCallbackHolder().put(activity, callback);
             }
             Intent intent = activity.getIntent();
             if(intent != null){
@@ -128,7 +129,7 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
             postcard.navigation(activity, requestCode, new NavigationCallbackWrapper(new NavigationCallback(){
                 @Override public void onLost(Postcard postcard){
                     // remove the callback and invoke onCancel when the postcard lost
-                    RouteCallback routeCallback = getRouteCallbacks().remove(context);
+                    RouteCallback routeCallback = getRouteCallbackHolder().remove(context);
                     if(routeCallback != null){
                         routeCallback.onCancel();
                     }
@@ -145,7 +146,7 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
     @Override public void onActivityResult(Activity context, int requestCode, int resultCode, Intent data){
         if(context != null){
             //dispatch the callback
-            RouteCallback routeCallback = getRouteCallbacks().remove(context);
+            RouteCallback routeCallback = getRouteCallbackHolder().remove(context);
             if(routeCallback != null){
                 routeCallback.onResponse(requestCode, resultCode, data);
             }
@@ -172,25 +173,25 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
     }
 
     /** get or create services cache */
-    private LruCache<String,Object> getServices(){
-        if(mServices == null){
-            mServices = new LruCache<>(6);
+    private LruCache<String,Object> getServiceCache(){
+        if(mServiceCache == null){
+            mServiceCache = new LruCache<>(6);
         }
-        return mServices;
+        return mServiceCache;
     }
     /** get or create navigators cache */
-    private LruCache<Class<?>,Object> getNavigators(){
-        if(mNavigators == null){
-            mNavigators = new LruCache<>(5);
+    private LruCache<Class<?>,Object> getNavigatorCache(){
+        if(mNavigatorCache == null){
+            mNavigatorCache = new LruCache<>(5);
         }
-        return mNavigators;
+        return mNavigatorCache;
     }
     /** get or create callbacks holder */
-    private Map<Activity,RouteCallback> getRouteCallbacks(){
-        if(mRouteCallbacks == null){
-            mRouteCallbacks = new HashMap<>();
+    private Map<Activity,RouteCallback> getRouteCallbackHolder(){
+        if(mRouteCallbackHolder == null){
+            mRouteCallbackHolder = new HashMap<>();
         }
-        return mRouteCallbacks;
+        return mRouteCallbackHolder;
     }
 
 }

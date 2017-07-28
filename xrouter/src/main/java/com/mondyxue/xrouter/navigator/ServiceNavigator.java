@@ -4,7 +4,7 @@ import com.alibaba.android.arouter.facade.template.IProvider;
 
 /**
  * A service navigator
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface ServiceNavigator{
 

@@ -9,7 +9,7 @@ import com.mondyxue.xrouter.demo.api.data.UserInfo;
 
 /**
  * Callback for {@link UserInfo}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public abstract class UserInfoCallback extends RouteCallback<UserInfo>{
 

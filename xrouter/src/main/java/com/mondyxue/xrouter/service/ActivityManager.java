@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * A manager for listening activity's lifecycle
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface ActivityManager{
 

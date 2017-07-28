@@ -9,7 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Flags for using as extras in {@link Route#extras()}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @IntDef(flag = true, value = {
         RouteType.GreenChannel,

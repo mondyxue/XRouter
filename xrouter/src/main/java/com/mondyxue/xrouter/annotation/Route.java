@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * Define the route in navigator interfaces
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

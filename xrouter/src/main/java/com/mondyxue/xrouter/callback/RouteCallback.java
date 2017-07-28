@@ -12,7 +12,7 @@ import com.alibaba.android.arouter.facade.Postcard;
  * <li>{@link com.mondyxue.xrouter.navigator.ActivityNavigator#startActivityForResult(RouteCallback)} </li>
  * <li>{@link com.mondyxue.xrouter.navigator.Router#startActivityForResult(Postcard, int, RouteCallback)}</li>
  * </ul>
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public abstract class RouteCallback<T>{
 

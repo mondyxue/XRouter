@@ -7,7 +7,7 @@ import com.mondyxue.xrouter.navigator.ActivityNavigator;
 
 /**
  * Navigator for login module
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface LoginNavigator{
 

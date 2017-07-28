@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * A navigator builder replaced by {@link Postcard}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public final class NavigatorBuilder{
 

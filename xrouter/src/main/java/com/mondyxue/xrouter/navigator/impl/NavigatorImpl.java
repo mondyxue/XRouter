@@ -16,7 +16,7 @@ import com.mondyxue.xrouter.utils.TypeUtils;
 
 /**
  * The implementation of {@link Navigator}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 class NavigatorImpl implements Navigator{
 

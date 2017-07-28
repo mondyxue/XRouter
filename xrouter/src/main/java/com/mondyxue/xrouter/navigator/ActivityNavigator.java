@@ -7,7 +7,7 @@ import com.mondyxue.xrouter.callback.RouteCallback;
 
 /**
  * A activity navigator
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface ActivityNavigator<T>{
 

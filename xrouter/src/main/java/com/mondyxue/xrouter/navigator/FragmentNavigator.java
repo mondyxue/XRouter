@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 
 /**
  * A fragment navigator
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface FragmentNavigator{
 

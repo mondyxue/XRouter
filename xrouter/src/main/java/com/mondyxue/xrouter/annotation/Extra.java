@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * This for the parameter type: {@link com.mondyxue.xrouter.constant.Type}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

@@ -6,7 +6,7 @@ import com.mondyxue.xrouter.demo.api.navigator.BaseNavigator;
 
 /**
  * The implementation of {@link com.mondyxue.xrouter.interceptor.FragmentInterceptor}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Interceptor(priority = 8, name = "FragmentInterceptor")
 public class FragmentInterceptor extends com.mondyxue.xrouter.interceptor.FragmentInterceptor implements IInterceptor{

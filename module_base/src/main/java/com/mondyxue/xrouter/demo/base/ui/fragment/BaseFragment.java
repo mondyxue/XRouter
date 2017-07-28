@@ -13,11 +13,12 @@ import com.mondyxue.xrouter.XRouter;
 import com.mondyxue.xrouter.demo.base.R;
 
 /**
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public abstract class BaseFragment extends Fragment{
 
     private TextView mTvTitle;
+
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(getRootLayout(), container, false);
         View ivBack = rootView.findViewById(R.id.btn_back);
@@ -35,6 +36,10 @@ public abstract class BaseFragment extends Fragment{
 
     @LayoutRes
     protected abstract int getRootLayout();
+
+    protected void injectExtras(){
+        XRouter.getRouter().inject(BaseFragment.this);
+    }
 
     protected abstract void initView(View rootView);
 
@@ -55,4 +60,5 @@ public abstract class BaseFragment extends Fragment{
                .getActivityManager()
                .onActivityResult(getActivity(), requestCode, resultCode, data);
     }
+
 }

@@ -5,7 +5,7 @@ import android.app.Application;
 import com.mondyxue.xrouter.XRouter;
 
 /**
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public class DemoApplication extends Application{
 

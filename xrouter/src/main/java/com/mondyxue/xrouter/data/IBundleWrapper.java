@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * A bundle wrapper for parsing bundle extras
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface IBundleWrapper{
 

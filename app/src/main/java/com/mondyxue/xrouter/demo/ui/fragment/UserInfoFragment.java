@@ -13,7 +13,7 @@ import com.mondyxue.xrouter.demo.api.navigator.LoginNavigator;
 import com.mondyxue.xrouter.demo.base.ui.fragment.BaseFragment;
 
 /**
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = DemoNavigator._UserInfoFragment, extras = RouteType.LoginFragment)
 public class UserInfoFragment extends BaseFragment{

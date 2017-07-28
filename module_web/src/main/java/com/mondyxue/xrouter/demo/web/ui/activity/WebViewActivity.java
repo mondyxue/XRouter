@@ -7,6 +7,7 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.mondyxue.xrouter.constant.RouteType;
 import com.mondyxue.xrouter.demo.api.constant.Extras;
@@ -15,19 +16,22 @@ import com.mondyxue.xrouter.demo.base.ui.activity.BaseActivity;
 import com.mondyxue.xrouter.demo.web.R;
 
 /**
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = WebNavigator._WebActivity, extras = RouteType.Activity | RouteType.GreenChannel)
 public class WebViewActivity extends BaseActivity{
 
+    @Autowired(name = Extras.Url)
+    public String mExtraUrl;
     private WebView mWebView;
-
     @Override protected int getRootLayout(){
         return R.layout.activity_webview;
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override protected void init(){
+
+        injectExtras();
 
         mWebView = findViewById(R.id.webview);
 
@@ -51,11 +55,10 @@ public class WebViewActivity extends BaseActivity{
             }
         });
 
-        String url = getIntent().getStringExtra(Extras.Url);
-        if(TextUtils.isEmpty(url)){
-            url = "https://github.com/MondyXue/XRouter";
+        if(TextUtils.isEmpty(mExtraUrl)){
+            mExtraUrl = "https://github.com/MondyXue/XRouter";
         }
-        mWebView.loadUrl(url);
+        mWebView.loadUrl(mExtraUrl);
 
     }
 

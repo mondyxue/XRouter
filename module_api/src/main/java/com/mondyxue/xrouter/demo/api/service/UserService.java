@@ -4,7 +4,7 @@ import com.mondyxue.xrouter.demo.api.data.UserInfo;
 
 /**
  * Demo service for userinfo
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface UserService{
 

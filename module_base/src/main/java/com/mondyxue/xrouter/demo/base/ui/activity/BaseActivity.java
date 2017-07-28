@@ -29,6 +29,10 @@ public abstract class BaseActivity extends FragmentActivity{
     @LayoutRes
     protected abstract int getRootLayout();
 
+    protected void injectExtras(){
+        XRouter.getRouter().inject(BaseActivity.this);
+    }
+
     protected abstract void init();
 
     @Override public void onBackPressed(){

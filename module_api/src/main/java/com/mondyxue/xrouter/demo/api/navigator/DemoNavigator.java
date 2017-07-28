@@ -7,13 +7,13 @@ import com.mondyxue.xrouter.demo.api.constant.Extras;
 
 /**
  * Navigator for demo module
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface DemoNavigator{
 
-    String _UserInfoFragment = "/fragment/UserInfoFragment";
-    String _TextFragment = "/fragment/TextFragment";
-    String _MainActivity = "/activity/MainActivity";
+    String _UserInfoFragment = "/demo/fragment/UserInfoFragment";
+    String _TextFragment = "/demo/fragment/TextFragment";
+    String _MainActivity = "/demo/activity/MainActivity";
 
     /**
      * navigation to fragment with container acitivity

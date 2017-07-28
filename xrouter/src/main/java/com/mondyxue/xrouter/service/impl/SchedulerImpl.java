@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * The implementation of {@link Scheduler}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = Scheduler.PATH, extras = RouteType.GreenService)
 public class SchedulerImpl implements IProvider, Scheduler{

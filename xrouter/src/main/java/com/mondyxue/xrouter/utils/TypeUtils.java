@@ -1,7 +1,7 @@
 package com.mondyxue.xrouter.utils;
 
 /**
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public final class TypeUtils{
 

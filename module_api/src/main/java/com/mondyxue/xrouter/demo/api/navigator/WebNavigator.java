@@ -6,7 +6,7 @@ import com.mondyxue.xrouter.demo.api.constant.Extras;
 
 /**
  * Navigator for web module
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public interface WebNavigator{
 

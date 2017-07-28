@@ -12,7 +12,7 @@ import com.mondyxue.xrouter.demo.api.service.Logger;
 
 /**
  * The implementation of {@link Logger}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = BaseNavigator._Logger, extras = RouteType.GreenService)
 public class LoggerImpl implements Logger, IProvider{

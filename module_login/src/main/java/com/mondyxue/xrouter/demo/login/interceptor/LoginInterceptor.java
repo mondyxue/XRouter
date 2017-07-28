@@ -14,7 +14,7 @@ import com.mondyxue.xrouter.demo.api.navigator.LoginNavigator;
 
 /**
  * The implementation of {@link com.mondyxue.xrouter.interceptor.LoginInterceptor}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Interceptor(priority = 4, name = "LoginInterceptor")
 public class LoginInterceptor extends com.mondyxue.xrouter.interceptor.LoginInterceptor implements IInterceptor{

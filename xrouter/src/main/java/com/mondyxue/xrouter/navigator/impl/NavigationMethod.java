@@ -24,7 +24,7 @@ import java.util.Map;
 
 /**
  * A helper for invoking navigator's method
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 final class NavigationMethod{
 

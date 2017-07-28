@@ -20,7 +20,7 @@ import java.util.Stack;
 
 /**
  * The implementation of {@link ActivityManager}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = ActivityManager.PATH, extras = RouteType.GreenService)
 public class ActivityManagerImpl implements IProvider, ActivityManager, Application.ActivityLifecycleCallbacks{

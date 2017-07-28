@@ -9,7 +9,7 @@ import com.mondyxue.xrouter.navigator.Router;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public class XRouter{
 

@@ -10,7 +10,7 @@ import com.alibaba.android.arouter.facade.template.IInterceptor;
 
 /**
  * A interceptor for checking the extras in {@link Route#extras()}
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public abstract class RouteTypeInterceptor implements IInterceptor{
 

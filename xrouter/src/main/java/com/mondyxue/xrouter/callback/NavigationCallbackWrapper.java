@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
 
 /**
  * A wrapper for {@link NavigationCallback} to processing the fragment interception
- * @author Mondy <a href="mailto:mondyxue@gmail.com">E-Mail</a>
+ * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 public class NavigationCallbackWrapper implements NavigationCallback{
 
