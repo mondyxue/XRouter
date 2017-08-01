@@ -1,7 +1,7 @@
 XRouter
 ===
 
-### 一种基于[ARouter](https://github.com/alibaba/ARouter)的使用封装方案，实现对ARouter的Retrofit2式使用。
+### 一种基于[ARouter](https://github.com/alibaba/ARouter)的使用封装方案，实现对ARouter的Retrofit式使用。
 
 >##### Arouter是阿里巴巴开源的Android平台中对页面、服务提供路由功能的中间件，**没用过的务必点击**[传送门](https://github.com/alibaba/ARouter)
 
