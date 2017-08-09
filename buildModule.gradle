@@ -16,22 +16,35 @@ android {
 
     }
 
-    android {
-        lintOptions {
-            abortOnError false
+    lintOptions {
+        abortOnError false
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs = [
+                    'src/main/java',
+                    'build/generated/source/apt/debug',
+                    'build/generated/source/kapt/debug'
+            ]
         }
     }
 
 }
 
 dependencies {
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation 'com.android.support:support-v4:26.0.0-beta1'
+
+    // ARouter
     implementation('com.alibaba:arouter-api:1.2.1') {
         exclude group: 'com.android.support', module: 'support-v4'
     }
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.2.1'
 
+    // Modules
     if (!'xrouter'.equals(project.name)) {
         implementation project(':xrouter')
         if (!'module_api'.equals(project.name)) {

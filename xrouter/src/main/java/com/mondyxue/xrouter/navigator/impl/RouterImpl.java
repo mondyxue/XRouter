@@ -11,7 +11,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.facade.template.IProvider;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.mondyxue.xrouter.XRouter;
 import com.mondyxue.xrouter.callback.NavigationCallbackWrapper;
 import com.mondyxue.xrouter.callback.RouteCallback;
 import com.mondyxue.xrouter.constant.RouteExtras;
@@ -112,7 +111,7 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
 
     @Override public void startActivityForResult(Postcard postcard, int requestCode, RouteCallback callback){
         final Context context = getContext();
-        XRouter.getRouter().getActivityManager().addOnActivityResultListener(RouterImpl.this);
+        getActivityManager().addOnActivityResultListener(RouterImpl.this);
         if(context instanceof Activity && requestCode > 0){
             Activity activity = (Activity) context;
             if(callback != null){

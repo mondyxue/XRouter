@@ -1,7 +1,3 @@
 apply plugin: 'com.android.library'
-apply from: "../buildModule.gradle"
-
-def file = new File(rootProject.getRootDir(), "maven_deploy.gradle")
-if (file.exists()) {
-    apply from: file.absolutePath
-}
+apply from: '../buildModule.gradle'
+apply from: 'https://raw.githubusercontent.com/MondyXue/Gradle/master/maven/maven_deploy.gradle'

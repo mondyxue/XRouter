@@ -3,6 +3,7 @@ package com.mondyxue.xrouter.navigator.impl;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import com.alibaba.android.arouter.facade.Postcard;
@@ -72,128 +73,128 @@ public final class NavigatorBuilder{
         return mPostcard.getExtras().getInt(RouteExtras.RequestCode, -1);
     }
 
-    public NavigatorBuilder withFlags(int flags){
+    public NavigatorBuilder withFlags(@Postcard.FlagInt int flags){
         mPostcard.withFlags(flags);
         mPostcard.withInt(RouteExtras.Flags, flags);
         return this;
     }
 
-    public NavigatorBuilder withString(String key, String value){
+    public NavigatorBuilder withString(@NonNull String key, String value){
         mPostcard.withString(key, value);
         return this;
     }
 
-    public NavigatorBuilder withBoolean(String key, boolean value){
+    public NavigatorBuilder withBoolean(@NonNull String key, boolean value){
         mPostcard.withBoolean(key, value);
         return this;
     }
 
-    public NavigatorBuilder withShort(String key, short value){
+    public NavigatorBuilder withShort(@NonNull String key, short value){
         mPostcard.withShort(key, value);
         return this;
     }
 
-    public NavigatorBuilder withInt(String key, int value){
+    public NavigatorBuilder withInt(@NonNull String key, int value){
         mPostcard.withInt(key, value);
         return this;
     }
 
-    public NavigatorBuilder withLong(String key, long value){
+    public NavigatorBuilder withLong(@NonNull String key, long value){
         mPostcard.withLong(key, value);
         return this;
     }
 
-    public NavigatorBuilder withDouble(String key, double value){
+    public NavigatorBuilder withDouble(@NonNull String key, double value){
         mPostcard.withDouble(key, value);
         return this;
     }
 
-    public NavigatorBuilder withByte(String key, byte value){
+    public NavigatorBuilder withByte(@NonNull String key, byte value){
         mPostcard.withByte(key, value);
         return this;
     }
 
-    public NavigatorBuilder withChar(String key, char value){
+    public NavigatorBuilder withChar(@NonNull String key, char value){
         mPostcard.withChar(key, value);
         return this;
     }
 
-    public NavigatorBuilder withFloat(String key, float value){
+    public NavigatorBuilder withFloat(@NonNull String key, float value){
         mPostcard.withFloat(key, value);
         return this;
     }
 
-    public NavigatorBuilder withCharSequence(String key, CharSequence value){
+    public NavigatorBuilder withCharSequence(@NonNull String key, CharSequence value){
         mPostcard.withCharSequence(key, value);
         return this;
     }
 
-    public NavigatorBuilder withParcelable(String key, Parcelable value){
+    public NavigatorBuilder withParcelable(@NonNull String key, Parcelable value){
         mPostcard.withParcelable(key, value);
         return this;
     }
 
-    public NavigatorBuilder withParcelableArray(String key, Parcelable[] value){
+    public NavigatorBuilder withParcelableArray(@NonNull String key, Parcelable[] value){
         mPostcard.withParcelableArray(key, value);
         return this;
     }
 
-    public NavigatorBuilder withParcelableArrayList(String key, ArrayList<? extends Parcelable> value){
+    public NavigatorBuilder withParcelableArrayList(@NonNull String key, ArrayList<? extends Parcelable> value){
         mPostcard.withParcelableArrayList(key, value);
         return this;
     }
 
-    public NavigatorBuilder withSparseParcelableArray(String key, SparseArray<? extends Parcelable> value){
+    public NavigatorBuilder withSparseParcelableArray(@NonNull String key, SparseArray<? extends Parcelable> value){
         mPostcard.withSparseParcelableArray(key, value);
         return this;
     }
 
-    public NavigatorBuilder withIntegerArrayList(String key, ArrayList<Integer> value){
+    public NavigatorBuilder withIntegerArrayList(@NonNull String key, ArrayList<Integer> value){
         mPostcard.withIntegerArrayList(key, value);
         return this;
     }
 
-    public NavigatorBuilder withStringArrayList(String key, ArrayList<String> value){
+    public NavigatorBuilder withStringArrayList(@NonNull String key, ArrayList<String> value){
         mPostcard.withStringArrayList(key, value);
         return this;
     }
 
-    public NavigatorBuilder withCharSequenceArrayList(String key, ArrayList<CharSequence> value){
+    public NavigatorBuilder withCharSequenceArrayList(@NonNull String key, ArrayList<CharSequence> value){
         mPostcard.withCharSequenceArrayList(key, value);
         return this;
     }
 
-    public NavigatorBuilder withSerializable(String key, Serializable value){
+    public NavigatorBuilder withSerializable(@NonNull String key, Serializable value){
         mPostcard.withSerializable(key, value);
         return this;
     }
 
-    public NavigatorBuilder withByteArray(String key, byte[] value){
+    public NavigatorBuilder withByteArray(@NonNull String key, byte[] value){
         mPostcard.withByteArray(key, value);
         return this;
     }
 
-    public NavigatorBuilder withShortArray(String key, short[] value){
+    public NavigatorBuilder withShortArray(@NonNull String key, short[] value){
         mPostcard.withShortArray(key, value);
         return this;
     }
 
-    public NavigatorBuilder withCharArray(String key, char[] value){
+    public NavigatorBuilder withCharArray(@NonNull String key, char[] value){
         mPostcard.withCharArray(key, value);
         return this;
     }
 
-    public NavigatorBuilder withFloatArray(String key, float[] value){
+    public NavigatorBuilder withFloatArray(@NonNull String key, float[] value){
         mPostcard.withFloatArray(key, value);
         return this;
     }
 
-    public NavigatorBuilder withCharSequenceArray(String key, CharSequence[] value){
+    public NavigatorBuilder withCharSequenceArray(@NonNull String key, CharSequence[] value){
         mPostcard.withCharSequenceArray(key, value);
         return this;
     }
 
-    public NavigatorBuilder withBundle(String key, Bundle value){
+    public NavigatorBuilder withBundle(@NonNull String key, Bundle value){
         mPostcard.withBundle(key, value);
         return this;
     }

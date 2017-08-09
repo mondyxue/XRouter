@@ -10,6 +10,7 @@ import com.mondyxue.xrouter.annotation.DefaultExtras;
 import com.mondyxue.xrouter.annotation.Extra;
 import com.mondyxue.xrouter.annotation.Extras;
 import com.mondyxue.xrouter.annotation.Route;
+import com.mondyxue.xrouter.annotation.Transition;
 import com.mondyxue.xrouter.constant.RouteExtras;
 import com.mondyxue.xrouter.data.BundleWrapper;
 import com.mondyxue.xrouter.data.IBundleWrapper;
@@ -33,6 +34,7 @@ final class NavigationMethod{
 
     private Route mRoute;
     private DefaultExtras mDefaultExtras;
+    private Transition mTransition;
 
     NavigationMethod(Method method){
         // init annotations
@@ -44,6 +46,8 @@ final class NavigationMethod{
                 mRoute = (Route) annotation;
             }else if(annotation instanceof DefaultExtras){
                 mDefaultExtras = (DefaultExtras) annotation;
+            }else if(annotation instanceof Transition){
+                mTransition = (Transition) annotation;
             }
         }
         if(mRoute == null){
@@ -68,6 +72,9 @@ final class NavigationMethod{
         IBundleWrapper extras = processExtras(args);
         if(extras != null && !extras.isEmpty()){
             builder.with(extras.getBundle());
+        }
+        if(mTransition != null){
+            builder.withTransition(mTransition.enterAnim(), mTransition.exitAnim());
         }
 
         Navigator navigator = builder.setGreenChannel(mRoute.greenChannel())
