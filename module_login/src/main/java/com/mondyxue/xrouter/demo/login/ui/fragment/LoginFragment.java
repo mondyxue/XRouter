@@ -15,6 +15,7 @@ import com.mondyxue.xrouter.demo.api.data.UserInfo;
 import com.mondyxue.xrouter.demo.api.navigator.BaseNavigator;
 import com.mondyxue.xrouter.demo.api.navigator.DemoNavigator;
 import com.mondyxue.xrouter.demo.api.navigator.LoginNavigator;
+import com.mondyxue.xrouter.demo.api.service.Logger;
 import com.mondyxue.xrouter.demo.api.service.UserService;
 import com.mondyxue.xrouter.demo.base.ui.fragment.BaseFragment;
 import com.mondyxue.xrouter.demo.login.R;
@@ -26,6 +27,7 @@ import com.mondyxue.xrouter.demo.login.R;
 public class LoginFragment extends BaseFragment{
 
     private EditText mEtUserId;
+
     @Override protected int getRootLayout(){
         return R.layout.fragment_login;
     }
@@ -46,13 +48,20 @@ public class LoginFragment extends BaseFragment{
                         long userId;
 
                         try{
+
                             userId = Long.parseLong(mEtUserId.getText().toString());
+
                         }catch(NumberFormatException e){
+
                             //get a service by navigator
-                            XRouter.getRouter()
-                                   .create(BaseNavigator.class)
-                                   .getLogger().e("LoginFragment", "parsing userId", Log.getStackTraceString(e));
+                            Logger logger = XRouter.getRouter()
+                                                   .create(BaseNavigator.class)
+                                                   .getLogger();
+
+                            logger.e("LoginFragment", "parsing userId", Log.getStackTraceString(e));
+
                             Toast.makeText(getActivity(), "please input a valid userId", Toast.LENGTH_SHORT).show();
+
                             return;
                         }
 
