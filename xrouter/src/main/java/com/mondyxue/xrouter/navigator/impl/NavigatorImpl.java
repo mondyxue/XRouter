@@ -6,18 +6,23 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.alibaba.android.arouter.facade.Postcard;
+import com.alibaba.android.arouter.facade.service.SerializationService;
 import com.alibaba.android.arouter.facade.template.IProvider;
 import com.mondyxue.xrouter.XRouter;
 import com.mondyxue.xrouter.activity.ReforwardActivity;
 import com.mondyxue.xrouter.callback.RouteCallback;
 import com.mondyxue.xrouter.constant.RouteExtras;
+import com.mondyxue.xrouter.exception.SerializationException;
 import com.mondyxue.xrouter.navigator.Navigator;
-import com.mondyxue.xrouter.utils.TypeUtils;
+import com.mondyxue.xrouter.utils.BundleUtils;
+
+import java.util.Map;
 
 /**
  * The implementation of {@link Navigator}
  * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
+@SuppressWarnings("unchecked")
 class NavigatorImpl implements Navigator{
 
     private Postcard mPostcard;
@@ -62,21 +67,23 @@ class NavigatorImpl implements Navigator{
             path = path.substring(1);
         }
         Uri.Builder builder = new Uri.Builder();
-        builder.scheme(XRouter.SCHEME)
-               .authority(XRouter.AUTHORITY)
+        builder.scheme(XRouter.getScheme())
+               .authority(XRouter.getAuthority())
                .appendPath(path);
         Bundle extras = mPostcard.getExtras();
-        if(extras != null){
-            for(String key : extras.keySet()){
-                Object value = extras.get(key);
-                if(value != null){
-                    // check the value's type
-                    if(TypeUtils.isFundamentalType(value)){
-                        builder.appendQueryParameter(key, value.toString());
+        if(extras != null && extras.size() > 0){
+            Map<String,String> params = BundleUtils.toQueryParameters(extras, new BundleUtils.StringConverter(){
+                @Override public String convert(Object object){
+                    SerializationService service = XRouter.getRouter().getSerializationService();
+                    if(service != null){
+                        return service.object2Json(object);
                     }else{
-                        throw new IllegalArgumentException("unsupport query:" + value);
+                        throw new SerializationException(object);
                     }
                 }
+            });
+            for(String key : params.keySet()){
+                builder.appendQueryParameter(key, params.get(key));
             }
         }
         return builder.build();
@@ -88,7 +95,8 @@ class NavigatorImpl implements Navigator{
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Uri uri = mPostcard.getUri();
         if(uri != null){
-            intent.setData(mPostcard.getUri());
+            intent.setData(uri);
+            intent.putExtra(RouteExtras.PathTo, uri.getPath());
         }else{
             intent.putExtra(RouteExtras.PathTo, mPostcard.getPath());
         }

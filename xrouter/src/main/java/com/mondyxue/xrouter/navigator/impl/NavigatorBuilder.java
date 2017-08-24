@@ -204,6 +204,11 @@ public final class NavigatorBuilder{
         return this;
     }
 
+    public NavigatorBuilder withObject(@NonNull String key, Object value){
+        mPostcard.withObject(key, value);
+        return this;
+    }
+
     public NavigatorBuilder with(Bundle bundle){
         mPostcard.with(bundle);
         return this;

@@ -13,8 +13,8 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 public class XRouter{
 
-    public static String SCHEME = "togojoy";
-    public static String AUTHORITY = "router";
+    private static String sScheme = "app";
+    private static String sAuthority = "router";
 
     private static Router sRouter;
 
@@ -33,14 +33,19 @@ public class XRouter{
     public static void init(Application application){
         ARouter.init(application);
     }
-
+    public static String getScheme(){
+        return sScheme;
+    }
     /** Scheme setting for building route uri */
     public static void setScheme(String scheme){
-        SCHEME = scheme;
+        sScheme = scheme;
+    }
+    public static String getAuthority(){
+        return sAuthority;
     }
     /** Authority setting for building route uri */
     public static void setAuthority(String authority){
-        AUTHORITY = authority;
+        sAuthority = authority;
     }
     /** invoke this when Instant Run is enable */
     public static synchronized void openDebug(){

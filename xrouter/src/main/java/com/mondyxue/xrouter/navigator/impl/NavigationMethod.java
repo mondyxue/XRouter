@@ -3,8 +3,10 @@ package com.mondyxue.xrouter.navigator.impl;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 
+import com.alibaba.android.arouter.facade.service.SerializationService;
 import com.mondyxue.xrouter.XRouter;
 import com.mondyxue.xrouter.annotation.DefaultExtras;
 import com.mondyxue.xrouter.annotation.Extra;
@@ -14,11 +16,14 @@ import com.mondyxue.xrouter.annotation.Transition;
 import com.mondyxue.xrouter.constant.RouteExtras;
 import com.mondyxue.xrouter.data.BundleWrapper;
 import com.mondyxue.xrouter.data.IBundleWrapper;
+import com.mondyxue.xrouter.exception.SerializationException;
 import com.mondyxue.xrouter.navigator.ActivityNavigator;
 import com.mondyxue.xrouter.navigator.FragmentNavigator;
 import com.mondyxue.xrouter.navigator.Navigator;
 import com.mondyxue.xrouter.navigator.ServiceNavigator;
+import com.mondyxue.xrouter.utils.TypeUtils;
 
+import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -51,7 +56,7 @@ final class NavigationMethod{
             }
         }
         if(mRoute == null){
-            throw new IllegalArgumentException("no Route annotation found");
+            throw new RuntimeException("no Route annotation found");
         }
     }
 
@@ -97,18 +102,14 @@ final class NavigationMethod{
         }else{
             Object service = XRouter.getRouter().service(mRoute.path());
             if(service == null){
-                throw new RuntimeException(
-                        new ClassNotFoundException("no route find: " + mRoute.path())
-                );
+                throw new RuntimeException("no route found: " + mRoute.path());
             }else{
                 if(isExtendsOf(service.getClass(), mReturnType)){
                     return service;
                 }else{
-                    throw new RuntimeException(
-                            new ClassCastException(
-                                    "Couldn't convert " + service.getClass().getCanonicalName()
-                                    + " to " + mReturnType.getCanonicalName()
-                            )
+                    throw new ClassCastException(
+                            "Couldn't convert " + service.getClass().getCanonicalName()
+                            + " to " + mReturnType.getCanonicalName()
                     );
                 }
             }
@@ -126,11 +127,17 @@ final class NavigationMethod{
             for(Annotation annotation : annotations){
                 Object arg = args[i];
                 if(annotation instanceof Extra){
-                    String key = ((Extra) annotation).value();
-                    try{
+                    Extra annotationExtra = (Extra) annotation;
+                    String key = annotationExtra.value();
+                    if(annotationExtra.serializable() && ((arg instanceof Serializable) || (arg instanceof Parcelable))){
                         bundle.put(key, arg);
-                    }catch(Exception e){
-                        throw new IllegalArgumentException("unsupport extra:" + key + "=" + arg + " in Bundle", e);
+                    }else{
+                        SerializationService service = XRouter.getRouter().getSerializationService();
+                        if(service != null){
+                            bundle.put(key, service.object2Json(arg));
+                        }else{
+                            throw new SerializationException(key, arg);
+                        }
                     }
                 }else if(annotation instanceof Extras){
                     if(arg instanceof Bundle){
@@ -160,7 +167,14 @@ final class NavigationMethod{
                 throw new IllegalArgumentException("default extras must be one-to-one correspondence");
             }else{
                 for(int i = 0; i < types.length; i++){
-                    bundle.put(types[i], keys[i], values[i]);
+                    String key = keys[i];
+                    String value = values[i];
+                    Object parsedValue = TypeUtils.parse(types[i], value);
+                    if(parsedValue == null){
+                        throw new IllegalArgumentException("unsupport default extra {" + key + ":" + value + "}");
+                    }else{
+                        bundle.put(key, parsedValue);
+                    }
                 }
             }
         }

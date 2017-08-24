@@ -14,4 +14,6 @@ import java.lang.annotation.Target;
 public @interface Extra{
 
     String value();
+    boolean serializable() default true;
+
 }

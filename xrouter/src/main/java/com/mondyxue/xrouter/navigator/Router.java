@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 
 import com.alibaba.android.arouter.facade.Postcard;
+import com.alibaba.android.arouter.facade.service.SerializationService;
+import com.alibaba.android.arouter.facade.template.IProvider;
 import com.mondyxue.xrouter.callback.RouteCallback;
 import com.mondyxue.xrouter.navigator.impl.NavigatorBuilder;
 import com.mondyxue.xrouter.service.ActivityManager;
@@ -34,6 +36,9 @@ public interface Router{
     /** Getting a service with path */
     <T> T service(String path);
 
+    /** Getting a service with interfaces */
+    <T extends IProvider> T service(Class<T> service);
+
     /** Create a {@link NavigatorBuilder} with intent */
     NavigatorBuilder build(Intent intent);
 
@@ -59,5 +64,8 @@ public interface Router{
 
     Scheduler getScheduler();
     void setScheduler(Scheduler scheduler);
+
+    <PARSER extends SerializationService> PARSER getSerializationService();
+    <PARSER extends SerializationService> void setSerializationService(PARSER parser);
 
 }

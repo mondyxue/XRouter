@@ -9,6 +9,7 @@ import android.support.v4.util.LruCache;
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.callback.NavigationCallback;
+import com.alibaba.android.arouter.facade.service.SerializationService;
 import com.alibaba.android.arouter.facade.template.IProvider;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.mondyxue.xrouter.callback.NavigationCallbackWrapper;
@@ -38,6 +39,7 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
     private LruCache<String,Object> mServiceCache;
     private LruCache<Class<?>,Object> mNavigatorCache;
     private Map<Activity,RouteCallback> mRouteCallbackHolder;
+    private SerializationService mSerializationService;
 
     @Override public void init(Context context){}
     @Override public Context getContext(){
@@ -60,6 +62,15 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
     }
     @Override public void setScheduler(Scheduler scheduler){
         mScheduler = scheduler;
+    }
+    @Override public <PARSER extends SerializationService> PARSER getSerializationService(){
+        if(mSerializationService == null){
+            mSerializationService = service(SerializationService.class);
+        }
+        return (PARSER) mSerializationService;
+    }
+    @Override public <T extends SerializationService> void setSerializationService(T serializationService){
+        mSerializationService = serializationService;
     }
 
     @Override public void inject(Object container){
@@ -104,6 +115,19 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
             o = build(path).navigator().service();
             if(o != null){
                 routeServices.put(path, o);
+            }
+        }
+        return (T) o;
+    }
+    @Override public <T extends IProvider> T service(Class<T> service){
+        LruCache<String,Object> routeServices = getServiceCache();
+        String name = service.getName();
+        Object o = routeServices.get(name);
+        if(o == null){
+            // navigating with service interfaces
+            o = ARouter.getInstance().navigation(service);
+            if(o != null){
+                routeServices.put(name, o);
             }
         }
         return (T) o;
