@@ -30,6 +30,9 @@ public abstract class BaseFragment extends Fragment{
             });
         }
         mTvTitle = getActivity().findViewById(R.id.tv_title);
+        if(autoInjectExtras()){
+            XRouter.getRouter().inject(BaseFragment.this);
+        }
         initView(rootView);
         return rootView;
     }
@@ -37,8 +40,8 @@ public abstract class BaseFragment extends Fragment{
     @LayoutRes
     protected abstract int getRootLayout();
 
-    protected void injectExtras(){
-        XRouter.getRouter().inject(BaseFragment.this);
+    protected boolean autoInjectExtras(){
+        return false;
     }
 
     protected abstract void initView(View rootView);

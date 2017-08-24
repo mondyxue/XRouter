@@ -1,6 +1,2 @@
 apply plugin: 'com.android.library'
 apply from: "../buildModule.gradle"
-
-dependencies {
-    implementation project(':module_base')
-}

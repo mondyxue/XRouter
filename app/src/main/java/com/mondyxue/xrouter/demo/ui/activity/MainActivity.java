@@ -55,6 +55,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                    .toLoginFragment()
                    .startActivityForResult(new UserInfoCallback(){
                        @Override public void onResponse(@NonNull UserInfo data){
+                           XRouter.getRouter()
+                                  .create(DemoNavigator.class)
+                                  .toUserInfoFragment(data);
                            Toast.makeText(MainActivity.this, "login success: " + data.toString(), Toast.LENGTH_SHORT).show();
                        }
                    });

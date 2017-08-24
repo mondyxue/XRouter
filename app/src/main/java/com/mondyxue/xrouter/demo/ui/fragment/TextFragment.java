@@ -24,9 +24,11 @@ public class TextFragment extends BaseFragment{
         return R.layout.fragment_text;
     }
 
-    @Override protected void initView(View rootView){
+    @Override protected boolean autoInjectExtras(){
+        return true;
+    }
 
-        injectExtras();
+    @Override protected void initView(View rootView){
 
         TextView tvText = rootView.findViewById(R.id.tv_text);
         tvText.setText(mExtraText);
