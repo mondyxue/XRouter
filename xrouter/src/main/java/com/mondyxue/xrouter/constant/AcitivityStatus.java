@@ -18,7 +18,7 @@ import java.lang.annotation.RetentionPolicy;
         AcitivityStatus.ON_SAVEINSTANCESTATE,
         AcitivityStatus.ON_DESTROYED
 })
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.SOURCE)
 public @interface AcitivityStatus{
 
     int UNKNOWN = 0;

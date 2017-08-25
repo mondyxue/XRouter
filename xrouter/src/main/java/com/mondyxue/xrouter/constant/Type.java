@@ -33,7 +33,7 @@ import java.lang.annotation.RetentionPolicy;
         //        Type.CharSequenceArray
 
 })
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.SOURCE)
 public @interface Type{
 
     int Byte = 1;

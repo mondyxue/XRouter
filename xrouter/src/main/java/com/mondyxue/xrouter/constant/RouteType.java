@@ -26,7 +26,7 @@ import java.lang.annotation.RetentionPolicy;
         RouteType.GreenService,
         RouteType.MainActivity
 })
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.SOURCE)
 public @interface RouteType{
 
     int GreenChannel = 1;

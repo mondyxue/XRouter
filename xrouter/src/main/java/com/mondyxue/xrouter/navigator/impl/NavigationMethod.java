@@ -120,44 +120,9 @@ final class NavigationMethod{
 
     private IBundleWrapper processExtras(Object[] args){
         IBundleWrapper bundle = new BundleWrapper();
+
         bundle.put(RouteExtras.Title, mRoute.title());
-        // process parameter annotations
-        for(int i = 0; i < mParameterAnnotations.length; i++){
-            Annotation[] annotations = mParameterAnnotations[i];
-            for(Annotation annotation : annotations){
-                Object arg = args[i];
-                if(annotation instanceof Extra){
-                    Extra annotationExtra = (Extra) annotation;
-                    String key = annotationExtra.value();
-                    if(annotationExtra.serializable() && ((arg instanceof Serializable) || (arg instanceof Parcelable))){
-                        bundle.put(key, arg);
-                    }else{
-                        SerializationService service = XRouter.getRouter().getSerializationService();
-                        if(service != null){
-                            bundle.put(key, service.object2Json(arg));
-                        }else{
-                            throw new SerializationException(key, arg);
-                        }
-                    }
-                }else if(annotation instanceof Extras){
-                    if(arg instanceof Bundle){
-                        bundle.put((Bundle) arg);
-                    }else if(arg instanceof Map){
-                        Map<String,Object> extrasMap;
-                        try{
-                            extrasMap = ((Map<String,Object>) arg);
-                        }catch(Exception e){
-                            throw new IllegalArgumentException("@Extras only support Map<String,Object>", e);
-                        }
-                        for(String key : extrasMap.keySet()){
-                            bundle.put(key, extrasMap.get(key));
-                        }
-                    }else{
-                        throw new IllegalArgumentException("unsupport extras:" + arg);
-                    }
-                }
-            }
-        }
+
         // process default extras
         if(mDefaultExtras != null){
             int[] types = mDefaultExtras.type();
@@ -171,13 +136,62 @@ final class NavigationMethod{
                     String value = values[i];
                     Object parsedValue = TypeUtils.parse(types[i], value);
                     if(parsedValue == null){
-                        throw new IllegalArgumentException("unsupport default extra {" + key + ":" + value + "}");
+                        throw new IllegalArgumentException("Unsupported default extra {" + key + ":" + value + "}");
                     }else{
                         bundle.put(key, parsedValue);
                     }
                 }
             }
         }
+
+        // process parameter annotations
+        for(int i = 0; i < mParameterAnnotations.length; i++){
+            Annotation[] annotations = mParameterAnnotations[i];
+            Object arg = args[i];
+            if(arg == null){
+                continue;
+            }
+            boolean hasExtraAnnotation = false;
+            for(Annotation annotation : annotations){
+                if(annotation instanceof Extra){
+                    Extra annotationExtra = (Extra) annotation;
+                    String key = annotationExtra.value();
+                    if(annotationExtra.serializable() && ((arg instanceof Serializable) || (arg instanceof Parcelable))){
+                        bundle.put(key, arg);
+                    }else{
+                        SerializationService service = XRouter.getRouter().getSerializationService();
+                        if(service != null){
+                            bundle.put(key, service.object2Json(arg));
+                        }else{
+                            throw new SerializationException(key, arg);
+                        }
+                    }
+                    hasExtraAnnotation = true;
+                }else if(annotation instanceof Extras){
+                    if(hasExtraAnnotation){
+                        throw new RuntimeException("@Extra and @Extras can't work together.");
+                    }
+                    if(arg instanceof Bundle){
+                        bundle.put((Bundle) arg);
+                    }else if(arg instanceof Map){
+                        if(((Map) arg).size() > 0){
+                            Map mapExtra = (Map) arg;
+                            for(Object key : mapExtra.keySet()){
+                                if(key instanceof String){
+                                    bundle.put((String) key, mapExtra.get(key));
+                                }else{
+                                    throw new IllegalArgumentException("Unsupported key [" + key + "], it must be a String.");
+                                }
+                            }
+                        }
+                    }else{
+                        throw new IllegalArgumentException("Unsupported extras:" + arg + ", is should be Bundle or Map<String,Object>");
+                    }
+                    break;
+                }
+            }
+        }
+
         return bundle;
     }
 

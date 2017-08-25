@@ -23,7 +23,7 @@ public class BundleWrapper implements IBundleWrapper{
 
     @Override public IBundleWrapper put(String key, Object value){
         if(!BundleUtils.checkToPut(mBundle, key, value)){
-            throw new IllegalArgumentException("unsupport extra:" + value);
+            throw new IllegalArgumentException("Unsupported extra:" + value);
         }
         return this;
     }
