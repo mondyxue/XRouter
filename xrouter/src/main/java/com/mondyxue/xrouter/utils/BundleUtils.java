@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,17 +35,19 @@ public final class BundleUtils{
         }else if(value instanceof Double){
             bundle.putDouble(key, (Double) value);
         }else if(value instanceof ArrayList){
-            Object o = ((ArrayList) value).get(0);
-            if(o instanceof String){
-                bundle.putStringArrayList(key, (ArrayList<String>) value);
-            }else if(o instanceof Parcelable){
-                bundle.putParcelableArrayList(key, (ArrayList<Parcelable>) value);
-            }else if(o instanceof Integer){
-                bundle.putIntegerArrayList(key, (ArrayList<Integer>) value);
-            }else if(o instanceof CharSequence){
-                bundle.putCharSequenceArrayList(key, (ArrayList<CharSequence>) value);
-            }else{
-                bundle.putSerializable(key, (Serializable) value);
+            if(!((ArrayList) value).isEmpty()){
+                Object o = ((ArrayList) value).get(0);
+                if(o instanceof String){
+                    bundle.putStringArrayList(key, (ArrayList<String>) value);
+                }else if(o instanceof Parcelable){
+                    bundle.putParcelableArrayList(key, (ArrayList<Parcelable>) value);
+                }else if(o instanceof Integer){
+                    bundle.putIntegerArrayList(key, (ArrayList<Integer>) value);
+                }else if(o instanceof CharSequence){
+                    bundle.putCharSequenceArrayList(key, (ArrayList<CharSequence>) value);
+                }else{
+                    bundle.putSerializable(key, (Serializable) value);
+                }
             }
         }else if(value instanceof Bundle){
             bundle.putBundle(key, (Bundle) value);
@@ -103,7 +106,10 @@ public final class BundleUtils{
                      || (value instanceof short[])
                      || (value instanceof CharSequence[])
                      || (value instanceof Parcelable[])){
-                params.put(key, converter.convert(Collections.singletonList(value)));
+                List<Object> arrayList = Collections.singletonList(value);
+                if(!arrayList.isEmpty()){
+                    params.put(key, converter.convert(arrayList));
+                }
             }else if(value instanceof Bundle){
                 Map<String,String> bundleParams = toQueryParameters(((Bundle) value), converter);
                 params.put(key, converter.convert(bundleParams));
