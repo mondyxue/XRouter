@@ -1,11 +1,9 @@
 package com.mondyxue.xrouter.service.impl;
 
-import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.facade.template.IProvider;
 import com.mondyxue.xrouter.constant.RouteType;
 import com.mondyxue.xrouter.service.Scheduler;
 
@@ -18,12 +16,11 @@ import java.util.concurrent.TimeUnit;
  * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = Scheduler.PATH, extras = RouteType.GreenService)
-public class SchedulerImpl implements IProvider, Scheduler{
+public class SchedulerImpl extends AbstractProvider implements Scheduler{
 
     private Handler mUiHandler;
     private ThreadPoolExecutor mExcutor;
 
-    @Override public void init(Context context){}
     @Override public void setExecutor(ThreadPoolExecutor excutor){
         mExcutor = excutor;
     }

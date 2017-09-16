@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.facade.template.IProvider;
 import com.mondyxue.xrouter.constant.AcitivityStatus;
 import com.mondyxue.xrouter.constant.RouteType;
 import com.mondyxue.xrouter.service.ActivityManager;
@@ -23,55 +22,62 @@ import java.util.Stack;
  * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = ActivityManager.PATH, extras = RouteType.GreenService)
-public class ActivityManagerImpl implements IProvider, ActivityManager, Application.ActivityLifecycleCallbacks{
+public class ActivityManagerImpl extends AbstractProvider implements ActivityManager, Application.ActivityLifecycleCallbacks{
 
     private List<OnStatusChangedListener> mOnStatusChangedListeners;
     private List<OnActivityResultListener> mOnActivityResultListeners;
     private Stack<AcitivityHolder> mActivityStack = new Stack<>();
 
-    private Context mContext;
-
     @Override public void init(Context context){
-        mContext = context;
+        super.init(context);
         ((Application) context.getApplicationContext()).registerActivityLifecycleCallbacks(this);
     }
 
     @Override public Context getContext(){
         Activity topActivity = getTopActivity();
-        return topActivity == null ? mContext : topActivity;
+        return topActivity == null ? super.getContext() : topActivity;
     }
 
     @Override public void updateActivity(Activity activity, @AcitivityStatus int status){
-        if(status == AcitivityStatus.UNKNOWN){
-            return;
-        }
         if(mOnStatusChangedListeners != null){
-            for(OnStatusChangedListener listener : mOnStatusChangedListeners){
-                if(listener != null){
-                    switch(status){
-                    case AcitivityStatus.ON_CREATED:
-                        listener.onCreated(activity);
-                        break;
-                    case AcitivityStatus.ON_DESTROYED:
-                        listener.onDestroyed(activity);
-                        break;
-                    case AcitivityStatus.ON_PAUSED:
-                        listener.onPaused(activity);
-                        break;
-                    case AcitivityStatus.ON_RESUMED:
-                        listener.onResumed(activity);
-                        break;
-                    case AcitivityStatus.ON_SAVEINSTANCESTATE:
-                        listener.onSaveInstanceState(activity);
-                        break;
-                    case AcitivityStatus.ON_STARTED:
-                        listener.onStarted(activity);
-                        break;
-                    case AcitivityStatus.ON_STOPPED:
-                        listener.onStopped(activity);
-                        break;
-                    }
+            switch(status){
+            case AcitivityStatus.ON_CREATED:
+                for(OnStatusChangedListener listener : mOnStatusChangedListeners){
+                    listener.onCreated(activity);
                 }
+                break;
+            case AcitivityStatus.ON_DESTROYED:
+                for(OnStatusChangedListener listener : mOnStatusChangedListeners){
+                    listener.onDestroyed(activity);
+                }
+                break;
+            case AcitivityStatus.ON_PAUSED:
+                for(OnStatusChangedListener listener : mOnStatusChangedListeners){
+                    listener.onPaused(activity);
+                }
+                break;
+            case AcitivityStatus.ON_RESUMED:
+                for(OnStatusChangedListener listener : mOnStatusChangedListeners){
+                    listener.onResumed(activity);
+                }
+                break;
+            case AcitivityStatus.ON_SAVEINSTANCESTATE:
+                for(OnStatusChangedListener listener : mOnStatusChangedListeners){
+                    listener.onSaveInstanceState(activity);
+                }
+                break;
+            case AcitivityStatus.ON_STARTED:
+                for(OnStatusChangedListener listener : mOnStatusChangedListeners){
+                    listener.onStarted(activity);
+                }
+                break;
+            case AcitivityStatus.ON_STOPPED:
+                for(OnStatusChangedListener listener : mOnStatusChangedListeners){
+                    listener.onStopped(activity);
+                }
+                break;
+            case AcitivityStatus.UNKNOWN:
+                return;
             }
         }
         if(status == AcitivityStatus.ON_DESTROYED){

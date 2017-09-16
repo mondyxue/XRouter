@@ -40,7 +40,7 @@ class NavigatorImpl implements Navigator{
     }
 
     @Override public void startActivity(){
-        startActivityForResult(null);
+        XRouter.getRouter().startActivity(mPostcard);
     }
 
     @Override public void startActivityForResult(RouteCallback callback){

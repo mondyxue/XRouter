@@ -16,32 +16,34 @@ import com.mondyxue.xrouter.callback.NavigationCallbackWrapper;
 import com.mondyxue.xrouter.callback.RouteCallback;
 import com.mondyxue.xrouter.constant.RouteExtras;
 import com.mondyxue.xrouter.constant.RouteType;
+import com.mondyxue.xrouter.data.OneToManyMap;
 import com.mondyxue.xrouter.navigator.Router;
 import com.mondyxue.xrouter.service.ActivityManager;
 import com.mondyxue.xrouter.service.Scheduler;
+import com.mondyxue.xrouter.service.impl.AbstractProvider;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The implementation of {@link Router}
  * @author MondyXue <a href="mailto:mondyxue@gmail.com">E-Mail</a>
  */
 @Route(path = Router.PATH, extras = RouteType.GreenService)
-public class RouterImpl implements IProvider, Router, ActivityManager.OnActivityResultListener{
+public class RouterImpl extends AbstractProvider implements Router, ActivityManager.OnActivityResultListener{
 
     private Scheduler mScheduler;
     private ActivityManager mActivityManager;
+    private SerializationService mSerializationService;
 
     private LruCache<String,Object> mServiceCache;
     private LruCache<Class<?>,Object> mNavigatorCache;
-    private Map<Activity,RouteCallback> mRouteCallbackHolder;
-    private SerializationService mSerializationService;
+    private OneToManyMap<Activity,RouteCallback> mRouteCallbackHolder;
 
-    @Override public void init(Context context){}
+    @Override public void init(Context context){
+        super.init(context);
+    }
     @Override public Context getContext(){
         return getActivityManager().getContext();
     }
@@ -133,13 +135,17 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
         return (T) o;
     }
 
+    @Override public void startActivity(Postcard postcard){
+        postcard.navigation(getContext(), new NavigationCallbackWrapper());
+    }
+
     @Override public void startActivityForResult(Postcard postcard, int requestCode, RouteCallback callback){
         final Context context = getContext();
-        getActivityManager().addOnActivityResultListener(RouterImpl.this);
         if(context instanceof Activity && requestCode > 0){
-            Activity activity = (Activity) context;
+            final Activity activity = (Activity) context;
             if(callback != null){
                 // hold the callback
+                getActivityManager().addOnActivityResultListener(RouterImpl.this);
                 getRouteCallbackHolder().put(activity, callback);
             }
             Intent intent = activity.getIntent();
@@ -152,7 +158,7 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
             postcard.navigation(activity, requestCode, new NavigationCallbackWrapper(new NavigationCallback(){
                 @Override public void onLost(Postcard postcard){
                     // remove the callback and invoke onCancel when the postcard lost
-                    RouteCallback routeCallback = getRouteCallbackHolder().remove(context);
+                    RouteCallback routeCallback = getRouteCallbackHolder().remove(activity);
                     if(routeCallback != null){
                         routeCallback.onCancel();
                     }
@@ -210,9 +216,9 @@ public class RouterImpl implements IProvider, Router, ActivityManager.OnActivity
         return mNavigatorCache;
     }
     /** get or create callbacks holder */
-    private Map<Activity,RouteCallback> getRouteCallbackHolder(){
+    private OneToManyMap<Activity,RouteCallback> getRouteCallbackHolder(){
         if(mRouteCallbackHolder == null){
-            mRouteCallbackHolder = new HashMap<>();
+            mRouteCallbackHolder = new OneToManyMap<>();
         }
         return mRouteCallbackHolder;
     }

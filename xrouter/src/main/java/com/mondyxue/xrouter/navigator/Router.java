@@ -48,6 +48,8 @@ public interface Router{
     /** Create a {@link NavigatorBuilder} with uri */
     NavigatorBuilder build(Uri uri);
 
+    void startActivity(Postcard postcard);
+
     /**
      * Invoke startActivityForResult with a callback
      * @param postcard    route postcard
